@@ -17,10 +17,13 @@ antigen-bundle zsh-users/zsh-syntax-highlighting
 # Highlight history search bundle.
 antigen-bundle zsh-users/zsh-history-substring-search
 
+# Zsh completion.
+antigen-bundle xgarrido/zsh-completions
+
 # Homemade utilities
 antigen-bundle xgarrido/zsh-functions
 
-# Snailware utilities
+# SN@ilware utilities
 antigen-bundle xgarrido/zsh-snailware
 
 # Load the theme.
