@@ -6,6 +6,11 @@ function do_link ()
         echo "Linking '${dotfile}' file"
         ln -sf $PWD/${dotfile} ~/.
     done
+    for configdir in terminator tint2 openbox
+    do
+        echo "Linking '${configdir}' directory"
+        ln -sf $PWD/${configdir} ~/.config/.
+    done
     echo "Linking done."
 }
 
