@@ -1,5 +1,3 @@
-# My dotfiles
-
 ## Description
 These are my personal dotfiles, which I manage with the help of git
 and a nice tool called [dotfiles].  This is the base dotfiles
@@ -33,15 +31,13 @@ shell environment.
 [bashrc]:  https://github.com/xgarrido/dotfiles/blob/master/bashrc "bashrc"
 [toprc]:   https://github.com/xgarrido/dotfiles/blob/master/toprc  "toprc"
 
-[Xdefaults]:
-https://github.com/xgarrido/dotfiles/blob/master/Xdefaults "Xdefaults"
-[Xmodmap]:
-https://github.com/xgarrido/dotfiles/blob/master/Xmodmap"Xmodmap"
+[Xdefaults]: https://github.com/xgarrido/dotfiles/blob/master/Xdefaults "Xdefaults"
+[Xmodmap]:   https://github.com/xgarrido/dotfiles/blob/master/Xmodmap   "Xmodmap"
 
-[ackrc]: https://github.com/xgarrido/dotfiles/blob/master/.ackrc "ackrc"
-[ack]:   http://betterthangrep.com/                              "Ack"
+[ackrc]:     https://github.com/xgarrido/dotfiles/blob/master/.ackrc    "ackrc"
+[ack]:       http://betterthangrep.com/                                 "Ack"
 [gitconfig]: https://github.com/xgarrido/dotfiles/blob/master/gitconfig "gitconfig"
-[git]: http://git-scm.com/ "git"
+[git]:       http://git-scm.com/                                        "git"
 
 ## Installation
 
