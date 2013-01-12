@@ -3,6 +3,7 @@
 ignore = [
   '.git',
   '.gitignore',
+  '.gitmodules',
   'README.md',
   'tint2',
   'openbox',
