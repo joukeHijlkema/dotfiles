@@ -116,6 +116,11 @@
       </startupnotify>
     </action>
   </item>
+  <item label="Manage Dual Screen">
+    <action name="Execute">
+      <command>/home/garrido/.config/openbox/scripts/dual-screen</command>
+    </action>
+  </item>
   <separator />
   <item label="Reconfigure Openbox">
     <action name="Reconfigure" />

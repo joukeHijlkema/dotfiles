@@ -65,7 +65,10 @@ function print_menu ()
   if [[ ! -s /tmp/networks.tmp ]]; then 
     rm /tmp/networks.tmp
     notify warning "No networks found"
-    return 1
+    echo "<openbox_pipe_menu>"
+    echo "<item label=\"No networks found\"/>"
+    echo "</openbox_pipe_menu>"
+    return 0
   fi
 
   echo "<openbox_pipe_menu>"

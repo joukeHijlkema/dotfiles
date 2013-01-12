@@ -115,8 +115,8 @@
        desktops.  Set this to 0 to disable the popup. -->
   </desktops>
   <resize>
-    <drawContents>yes</drawContents>
-    <popupShow>Never</popupShow>
+    <drawContents>no</drawContents>
+    <popupShow>Always</popupShow>
     <!-- 'Always', 'Never', or 'Nonpixel' (xterms and such) -->
     <popupPosition>Center</popupPosition>
     <!-- 'Center', 'Top', or 'Fixed' -->
@@ -219,7 +219,10 @@
     <keybind key="C-S-m">
       <action name="ToggleMaximize"/>
     </keybind>
-    <keybind key="A-Escape">
+    <keybind key="C-S-l">
+      <action name="Resize"/>
+    </keybind>
+   <keybind key="A-Escape">
       <action name="Lower"/>
       <action name="FocusToBottom"/>
       <action name="Unfocus"/>
@@ -229,7 +232,7 @@
         <menu>client-menu</menu>
       </action>
     </keybind>
-    <keybind key="W-Tab">
+    <keybind key="W-m">
       <action name="ShowMenu">
         <menu>root-menu</menu>
       </action>
@@ -265,6 +268,7 @@
     </keybind>
     <!-- Keybindings for running applications -->
     <keybind key="A-0x31">
+      <!-- <keybind key="W-Tab"> -->
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>

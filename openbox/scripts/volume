@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [ $1 = 'up' ]; then
-    amixer set Master 5%+ unmute
+    amixer set Master 5%+
 elif [ $1 = 'down' ]; then
-    amixer set Master 5%- unmute
+    amixer set Master 5%-
 elif [ $1 = 'mute' ]; then
     amixer set Master toggle
 else
