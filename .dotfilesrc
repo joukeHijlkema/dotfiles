@@ -1,0 +1,13 @@
+# -*- mode: conf-unix ; -*-
+[dotfiles]
+repository = ~/Development/dotfiles
+ignore = [
+  '.git',
+  '.gitignore',
+  'tint2'
+  'openbox'
+  'terminator']
+# externals = {
+#   'tint2' : '~/.config',
+#   'terminator' : '~/.config',
+#   'openbox' : '~/.config'}
