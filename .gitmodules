@@ -1,3 +1,6 @@
 [submodule "emacs.d"]
 	path = emacs.d
 	url = git@github.com:xgarrido/emacs24-starter-kit.git
+[submodule "fonts/ubuntu-mono-powerline"]
+	path = fonts/ubuntu-mono-powerline
+	url = https://github.com/scotu/ubuntu-mono-powerline.git
