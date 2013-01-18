@@ -14,4 +14,4 @@ hsetroot -center /home/garrido/Images/Wallpapers/default &
 # Launch tint
 tint2 &
 # Swap Caps_Lock and Escape keys
-sleep 2 && xmodmap /home/garrido/.Xmodmap &
+xmodmap /home/garrido/.Xmodmap &
