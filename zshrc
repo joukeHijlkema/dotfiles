@@ -9,7 +9,6 @@ antigen-lib
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen-bundle git
 antigen-bundle svn
-antigen-bundle wakeonlan
 
 # Syntax highlighting bundle.
 antigen-bundle zsh-users/zsh-syntax-highlighting
