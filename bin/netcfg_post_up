@@ -1,0 +1,95 @@
+#!/bin/bash
+#
+# Script to be run right after the set up of internet connection
+#
+# This script does
+# - ssh tunneling between nemo/LAL machines
+#
+# Author(s)     : Xavier Garrido <<garrido@lal.in2p3.fr>>
+# Creation date : 2013-01-13
+# Last modified : 2013-01-30
+#
+
+appname="netcfg_post_up"
+
+function send_notification ()
+{
+    local icon="stock_dialog-info"
+    case $1 in
+	info)
+	    icon="stock_dialog-info"
+	    ;;
+	warning)
+	    icon="stock_dialog-warning"
+	    ;;
+	error)
+	    icon="stock_dialog-error"
+	    ;;
+    esac
+    sudo -u garrido notify-send -t 2000 -i ${icon} "${appname}" "$2"
+    return 0
+}
+
+function kill_ssh_tunnel ()
+{
+    local is_setup=$(ps aux | grep "$ssh_port:localhost:22" \
+                            | grep -v grep | awk '{print $2}')
+    if [ "x${is_setup}" != "x" ]; then
+        for id in ${is_setup}; do kill -9 $id;done
+    fi
+    return 0
+}
+
+function set_remote_tunnel ()
+{
+    ssh -f -L ${ssh_port}:localhost:${ssh_port} garrido@lx3.lal.in2p3.fr \
+        "ssh -L ${ssh_port}:localhost:22 ${machine_name} -N -f" > /dev/null 2>&1
+    return 0
+}
+
+function set_local_tunnel ()
+{
+    sudo -u garrido ssh -X -f -N -L \
+        ${ssh_port}:localhost:22 ${machine_name} > /dev/null 2>&1
+    return 0
+}
+
+function set_ssh_tunnel ()
+{
+    kill_ssh_tunnel
+    local name_server=$(cat /etc/resolv.conf | \
+        grep --max-count=1 nameserver | cut -d' ' -f2)
+    if [ ${name_server} = 192.168.1.1 ]; then
+        set_remote_tunnel
+    else
+        set_local_tunnel
+    fi
+    return 0
+}
+
+function main ()
+{
+    (
+        ssh_port=6261; machine_name=nemo3
+        set_ssh_tunnel
+    )
+    (
+        ssh_port=6262; machine_name=nemo4
+        set_ssh_tunnel
+    )
+    (
+        ssh_port=6263; machine_name=pc-91089
+        set_ssh_tunnel
+    )
+    return 0
+}
+
+main "$@"
+if [ $? -ne 0 ]; then
+    send_notification "error" \
+        "Something gets wrong with SSH tunelling"
+    return 1
+else
+    send_notification "info" \
+        "SSH tunneling established"
+fi
