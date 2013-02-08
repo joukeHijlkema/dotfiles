@@ -5,3 +5,6 @@
 	ui = auto
 [push]
 	default = simple
+[alias]
+        lg = log --graph --decorate --pretty=short
+        ci = svn dcommit
