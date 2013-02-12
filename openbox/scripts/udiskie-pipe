@@ -25,10 +25,10 @@ function notify ()
     case $1 in
 	info)
 	    icon="stock_dialog-info"
-	    ;; 
+	    ;;
 	warning)
 	    icon="stock_dialog-warning"
-	    ;; 
+	    ;;
 	error)
 	    icon="stock_dialog-error"
 	    ;;
@@ -78,7 +78,7 @@ function pipemenu () {
 
 [[ $(id -u) -ne 0 ]] && notify error "ROOT access required" && exit 1
 
-case $1 in 
+case $1 in
     unmount)
 	if [ "$2" = "all" ]; then
 	    sudo udiskie-umount --all

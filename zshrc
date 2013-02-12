@@ -20,7 +20,7 @@ antigen-bundle zsh-users/zsh-history-substring-search
 antigen-bundle xgarrido/zsh-completions
 
 # Homemade utilities
-antigen-bundle xgarrido/zsh-functions
+antigen-bundle xgarrido/zsh-utilities
 
 # SN@ilware utilities
 antigen-bundle xgarrido/zsh-snailware
@@ -29,7 +29,7 @@ antigen-bundle xgarrido/zsh-snailware
 antigen-bundle xgarrido/zsh-aggregator
 
 # Load the theme.
-antigen-theme xgarrido/zsh-functions nemo
+antigen-theme xgarrido/zsh-utilities nemo
 
 # Tell antigen that you're done.
 antigen-apply
