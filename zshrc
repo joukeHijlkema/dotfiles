@@ -29,7 +29,8 @@ antigen-bundle xgarrido/zsh-snailware
 antigen-bundle xgarrido/zsh-aggregator
 
 # Load the theme.
-antigen-theme xgarrido/zsh-utilities nemo
+antigen-bundle xgarrido/zsh-themes
+antigen-theme xgarrido/zsh-themes nemo
 
 # Tell antigen that you're done.
 antigen-apply
