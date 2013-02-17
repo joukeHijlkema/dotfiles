@@ -28,6 +28,9 @@ antigen-bundle xgarrido/zsh-snailware
 # SN@ilware aggregators
 antigen-bundle xgarrido/zsh-aggregator
 
+# Fabric utilities
+antigen-bundle xgarrido/zsh-fabric
+
 # Load the theme.
 antigen-bundle xgarrido/zsh-themes
 antigen-theme xgarrido/zsh-themes nemo
