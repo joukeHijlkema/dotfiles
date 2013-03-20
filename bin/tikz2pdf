@@ -89,6 +89,7 @@ else:
 \usepackage[graphics,tightpage,active]{preview}
 \usepackage{upgreek}
 \usepackage{comment}
+\usepackage{multirow}
 \PreviewEnvironment{tikzpicture}
 \newlength{\imagewidth}
 \newlength{\imagescale}
