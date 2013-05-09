@@ -1,0 +1,9 @@
+#!/bin/bash
+
+dir_wallpaper="/home/garrido/Images/Wallpapers"
+last_wallpaper=$(ls -rt1 ${dir_wallpaper}/_*.jpg | head -1)
+
+ln -sf ${last_wallpaper} ${dir_wallpaper}/default
+touch ${last_wallpaper}
+
+hsetroot -fill ${dir_wallpaper}/default &
