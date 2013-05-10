@@ -1,11 +1,12 @@
 [global_config]
   handle_size = 1
-  enabled_plugins = InactivityWatch, ActivityWatch, APTURLHandler
+  enabled_plugins = CustomCommandsMenu, InactivityWatch, ActivityWatch, APTURLHandler
   focus = system
   title_transmit_fg_color = "#c0bebf"
   title_inactive_fg_color = "#c0bebf"
   title_transmit_bg_color = "#fdf6e3"
   tab_position = bottom
+  inactive_color_offset = 1.26
   title_inactive_bg_color = "#fdf6e3"
 [keybindings]
   toggle_zoom = F12
@@ -28,6 +29,7 @@
   [[default]]
     scrollbar_position = hidden
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#859900:#b58900:#268bd2:#6c71c4:#93a1a1:#fdf6e3"
+    background_image = None
     background_darkness = 0.9
     use_system_font = False
     foreground_color = "#708183"
@@ -37,6 +39,7 @@
     background_color = "#fdf6e3"
     scrollback_infinite = True
   [[default.bak]]
+    background_image = None
     scrollbar_position = hidden
     foreground_color = "#444342"
     scroll_on_output = False
@@ -44,9 +47,10 @@
     background_color = "#ffffff"
     scrollback_infinite = True
   [[nemo]]
+    scrollbar_position = hidden
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#d33682:#859900:#b58900:#268bd2:#6c71c4:#93a1a1:#fdf6e3"
     background_darkness = 0.9
-    scrollbar_position = hidden
+    background_image = None
     foreground_color = "#ffffff"
     scroll_on_output = False
     show_titlebar = False

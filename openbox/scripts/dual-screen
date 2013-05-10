@@ -10,7 +10,7 @@ elif (xrandr | grep "$EXT" | grep " connected"); then
 fi
 
 # Reset wallpaper
-hsetroot -center /home/garrido/Images/Wallpapers/default &
+/home/garrido/.config/openbox/scripts/change-wallpaper
 
 # Disable beep
 xset -b &
