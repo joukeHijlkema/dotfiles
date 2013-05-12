@@ -30,6 +30,16 @@ function send_notification ()
     return 0
 }
 
+function ping_machine ()
+{
+    ssh garrido@lx3.lal.in2p3.fr "ping -c 1 ${machine_name} > /dev/null"
+    if [ $? -ne 0 ]; then
+        send_notification "warning" "${machine_name} is not connected"
+        return 1
+    fi
+    return 0
+}
+
 function kill_ssh_tunnel ()
 {
     local is_setup=$(ps aux | grep "$ssh_port:localhost:22" \
@@ -46,7 +56,7 @@ function kill_ssh_tunnel ()
 function set_remote_tunnel ()
 {
     ssh -f -L ${ssh_port}:localhost:${ssh_port} garrido@lx3.lal.in2p3.fr \
-        "ssh -L ${ssh_port}:localhost:22 ${machine_name} -N -f" > /dev/null 2>&1
+        "ssh -X -f -N -L ${ssh_port}:localhost:22 ${machine_name}" > /dev/null 2>&1 &
     return 0
 }
 
@@ -59,6 +69,10 @@ function set_local_tunnel ()
 
 function set_ssh_tunnel ()
 {
+    if ! ping_machine; then
+        return 1
+    fi
+
     kill_ssh_tunnel
     local name_server=$(cat /etc/resolv.conf | \
         grep --max-count=1 nameserver | cut -d' ' -f2)
@@ -67,6 +81,8 @@ function set_ssh_tunnel ()
     else
         set_local_tunnel
     fi
+
+    send_notification "info" "${machine_name} tunnel done"
     return 0
 }
 
@@ -75,17 +91,14 @@ function main ()
     (
         ssh_port=6261; machine_name=nemo3.lal.in2p3.fr
         set_ssh_tunnel
-        send_notification "info" "nemo3 tunnel done"
     )
     (
         ssh_port=6262; machine_name=nemo4.lal.in2p3.fr
         set_ssh_tunnel
-        send_notification "info" "nemo4 tunnel done"
     )
     (
         ssh_port=6263; machine_name=pc-91089.lal.in2p3.fr
         set_ssh_tunnel
-        send_notification "info" "pc-91089 tunnel done"
     )
     return 0
 }
