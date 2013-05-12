@@ -37,6 +37,9 @@ function kill_ssh_tunnel ()
     if [ "x${is_setup}" != "x" ]; then
         for id in ${is_setup}; do kill -9 $id;done
     fi
+
+    ssh garrido@lx3.lal.in2p3.fr \
+        "ps -edf | grep ssh | grep ${machine_name} | grep -v grep | grep -v tcsh | awk '{print \"kill -9\", \$2}' | sh"
     return 0
 }
 
@@ -70,16 +73,19 @@ function set_ssh_tunnel ()
 function main ()
 {
     (
-        ssh_port=6261; machine_name=nemo3
+        ssh_port=6261; machine_name=nemo3.lal.in2p3.fr
         set_ssh_tunnel
+        send_notification "info" "nemo3 tunnel done"
     )
     (
-        ssh_port=6262; machine_name=nemo4
+        ssh_port=6262; machine_name=nemo4.lal.in2p3.fr
         set_ssh_tunnel
+        send_notification "info" "nemo4 tunnel done"
     )
     (
-        ssh_port=6263; machine_name=pc-91089
+        ssh_port=6263; machine_name=pc-91089.lal.in2p3.fr
         set_ssh_tunnel
+        send_notification "info" "pc-91089 tunnel done"
     )
     return 0
 }
