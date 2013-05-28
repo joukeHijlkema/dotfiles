@@ -15,3 +15,5 @@ hsetroot -fill /home/garrido/Images/Wallpapers/default &
 tint2 &
 # Swap Caps_Lock and Escape keys
 xmodmap /home/garrido/.Xmodmap &
+# Running devmon to mount/umount media
+devmon &
