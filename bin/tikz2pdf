@@ -40,7 +40,7 @@ op = optparse.OptionParser(usage="%prog [options] foo.tikz")
 op.add_option("-v", "--verbose", action = "store_true", default = False,
               dest = "verbose", help = "verbose output")
 op.add_option("-o", "--once", action = "store_true",
-              dest = "once", default = False,
+              dest = "once", default = True,
               help = "only convert once, then clean up temporary files and quit")
 op.add_option("-s", "--view", action = "store_true",
               dest = "view", default = False,
@@ -48,14 +48,11 @@ op.add_option("-s", "--view", action = "store_true",
 op.add_option("-l", "--helvetica", action = "store_true",
               dest = "helvetica", default = False,
               help = "use helvetica font")
-op.add_option("-e", "--shell-escape", action = "store_true",
-              dest = "shell_escape", default = False,
-              help = "use shell escape for external program call")
 
 options, args = op.parse_args()
 tikzName, = args # exactly one filename expected
 
-basename = "tikz2pdf_temp"
+basename = os.path.splitext(tikzName)[0]
 texName = basename + ".tex"
 pdfName = basename + ".pdf"
 
@@ -79,20 +76,20 @@ if texdocViewCommand:
 if False:
 	template = file(templateFilename).read()
 else:
-	template = r"""\documentclass{article}
+	template = r"""\documentclass[convert]{standalone}
 
 \usepackage{lmodern}
 \usepackage[eulergreek]{sansmath}
 \usepackage{tikz,nicefrac,amsmath,pifont,units}
 \usetikzlibrary{positioning,arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
 
-\usepackage[graphics,tightpage,active]{preview}
+%%\usepackage[graphics,tightpage,active]{preview}
 \usepackage{upgreek}
 \usepackage{comment}
 \usepackage{multirow}
-\PreviewEnvironment{tikzpicture}
-\newlength{\imagewidth}
-\newlength{\imagescale}
+%%\PreviewEnvironment{tikzpicture}
+%%\newlength{\imagewidth}
+%%\newlength{\imagescale}
 """
         if options.helvetica:
                 template += r"""
@@ -133,12 +130,8 @@ while True:
 			print "tikz2pdf: calling pdflatex..."
 			if not options.verbose:
 				out = tempfile.TemporaryFile()
-                                if options.shell_escape:
-                                        ec = subprocess.call(
-                                                ["pdflatex", "-halt-on-error", "-shell-escape", texName], stdout = out)
-                                else:
-                                        ec = subprocess.call(
-				["pdflatex", "-halt-on-error", texName], stdout = out)
+                                ec = subprocess.call(
+                                        ["pdflatex", "-halt-on-error", "-shell-escape", texName], stdout = out)
 			if ec:
 				if out:
 					out.seek(0)
@@ -160,9 +153,9 @@ while True:
 		verboseUnlink(pdfName)
 		break
 
-verboseUnlink(texName)
-for temp in glob.glob("tikz2pdf_temp.*"):
-	if temp != pdfName:
-		verboseUnlink(temp)
-# for ext in (".aux", ".log"):
-# 	verboseUnlink(basename + ext)
+# verboseUnlink(texName)
+# for temp in glob.glob("tikz2pdf_temp.*"):
+# 	if temp != pdfName:
+# 		verboseUnlink(temp)
+for ext in (".aux", ".log"):
+	verboseUnlink(basename + ext)
