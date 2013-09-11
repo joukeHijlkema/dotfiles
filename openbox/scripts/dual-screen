@@ -1,6 +1,11 @@
 #!/bin/bash
 
 screens=$(xrandr | awk '{if ($2 == "connected") print $1}')
+nbr_screen=$(echo $screens | wc -w)
+if [ $nbr_screen -eq 1 ]; then
+    exit 0
+fi
+
 for screen in ${screens}
 do
     # Get the best screen resolution
