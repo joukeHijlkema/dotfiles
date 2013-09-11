@@ -1,13 +1,19 @@
 #!/bin/bash
 
-IN="LVDS1"
-EXT="HDMI3"
-
-if (xrandr | grep "$EXT" | grep "+"); then
-    xrandr --output $EXT --off --output $IN --auto
-elif (xrandr | grep "$EXT" | grep " connected"); then
-    xrandr --output $IN --off --output $EXT --mode 1920x1200
-fi
+screens=$(xrandr | awk '{if ($2 == "connected") print $1}')
+for screen in ${screens}
+do
+    # Get the best screen resolution
+    next_line=$(xrandr | awk '/'${screen}'/{getline; print}')
+    resolution=$(echo ${next_line} | awk '{print $1}')
+    current=$(echo ${next_line} | awk '{if ($2 ~ "*") print}')
+    if [ "$current" != "" ]; then
+        echo "Monitor $screen is currently used"
+        xrandr --output ${screen} --off
+    else
+        xrandr --output ${screen} --mode ${resolution}
+    fi
+done
 
 # Reset wallpaper
 /home/garrido/.config/openbox/scripts/change-wallpaper
