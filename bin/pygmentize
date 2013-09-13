@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# An ugly hack to speed up pdflatex using the minted package place this file
+# with the name 'pygmentize' somewhere on your path before the 'real'
+# pygmentize, such that this file gets executed and can act as a wrapper around
+# the 'real' pygmentize.  This script computes a hash-value (md5sum) of the
+# input file from minted and caches the output of pygmentize.  The cached files
+# are stored in a .minted/ directory next to the TeX doc.
+
+# The real pygmentize command, may need customization to work on your system.
+# Use 'whereis pygmentize' to found the location on your system.
+real_pygmentize=/usr/bin/pygmentize
+
+# find the output file used by minted
+take_outfile=0
+for arg in $@
+do
+    if [ $take_outfile -eq 1 ]
+    then
+        outfile=$arg
+        take_outfile=0
+    fi
+    if [ $arg = -o ]
+    then
+        take_outfile=1
+    fi
+done
+
+# the last parameter is the input file
+infile=${@: -1}
+
+# Create the .minted/ directory, if it doesn't exist.
+minted_cache="/tmp/minted.d"
+if [[ ! -d ${minted_cache} ]]; then
+    mkdir ${minted_cache}
+fi
+
+# compute the hash value of the input
+hash="${minted_cache}/$( md5sum ${infile} | cut -d' ' -f1 )"
+
+if [ -f ${hash} ]; then
+    # we have cached output from pygmentize
+    cp ${hash} ${outfile}
+else
+    # call 'real' pygmentize and cache the result
+    $real_pygmentize "$@"
+    cp ${outfile} ${hash}
+fi
