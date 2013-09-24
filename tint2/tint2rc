@@ -23,8 +23,8 @@ border_color = #FFFFFF 60
 
 # Panel
 panel_monitor = all
-panel_position = bottom center horizontal
-panel_size = 100% 24
+panel_position = bottom right horizontal
+panel_size = 150 24
 panel_margin = 0 0
 panel_padding = 0 0 0
 panel_dock = 0
@@ -33,11 +33,11 @@ panel_layer = top
 panel_background_id = 1
 
 # Panel Autohide
-autohide = 0
+autohide = 1
 autohide_show_timeout = 0.3
 autohide_hide_timeout = 2
-autohide_height = 2
-strut_policy = follow_size
+autohide_height = 0
+strut_policy = minimum
 
 # Taskbar
 taskbar_mode = single_desktop
@@ -48,8 +48,8 @@ taskbar_active_background_id = 0
 # Tasks
 urgent_nb_of_blink = 8
 task_icon = 0
-task_text = 1
-task_centered = 1
+task_text = 0
+task_centered = 0
 task_maximum_size = 100 35
 task_padding = 6 2
 task_background_id = 3
@@ -65,8 +65,8 @@ task_iconified_icon_asb = 70 0 0
 
 # Fonts
 task_font = Ubuntu 7
-task_font_color = #FFFFFF 42
-task_active_font_color = #FFFFFF 63
+task_font_color = #FFFFFF 40
+task_active_font_color = #FFFFFF 60
 task_urgent_font_color = #FFFFFF 80
 task_iconified_font_color = #FFFFFF 60
 font_shadow = 0
@@ -82,7 +82,7 @@ systray_icon_asb = 70 0 0
 # Clock
 time1_format = %H:%M
 time1_font = Ubuntu 8
-time2_format = %A %d %B
+time2_format = %a %d %b
 time2_font = Ubuntu 6
 clock_font_color = #FFFFFF 60
 clock_padding = 1 0
