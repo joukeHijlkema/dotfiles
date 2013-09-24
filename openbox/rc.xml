@@ -222,7 +222,7 @@
     <keybind key="C-S-l">
       <action name="Resize"/>
     </keybind>
-   <keybind key="A-Escape">
+    <keybind key="A-Escape">
       <action name="Lower"/>
       <action name="FocusToBottom"/>
       <action name="Unfocus"/>
@@ -282,12 +282,17 @@
         <command>/home/garrido/.config/openbox/scripts/dual-screen</command>
       </action>
     </keybind>
-     <keybind key="W-w">
+    <keybind key="W-S-c">
+      <action name="Execute">
+        <command>/home/garrido/.config/openbox/scripts/dual-screen clone</command>
+      </action>
+    </keybind>
+    <keybind key="W-w">
       <action name="Execute">
         <command>/home/garrido/.config/openbox/scripts/change-wallpaper</command>
       </action>
     </keybind>
-   <keybind key="A-t">
+    <keybind key="A-t">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>

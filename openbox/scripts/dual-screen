@@ -1,20 +1,20 @@
 #!/bin/bash
 
 screens=$(xrandr | awk '{if ($2 == "connected") print $1}')
-nbr_screen=$(echo $screens | wc -w)
-if [ $nbr_screen -eq 1 ]; then
-    exit 0
-fi
 
+first_monitor=1
 for screen in ${screens}
 do
     # Get the best screen resolution
     next_line=$(xrandr | awk '/'${screen}'/{getline; print}')
     resolution=$(echo ${next_line} | awk '{print $1}')
     current=$(echo ${next_line} | awk '{if ($2 ~ "*") print}')
-    if [ "$current" != "" ]; then
+    if [[ "$current" != "" && $first_monitor -eq 1 ]]; then
         echo "Monitor $screen is currently used"
-        xrandr --output ${screen} --off
+        if [ "$1" != "clone" ]; then
+            xrandr --output ${screen} --off
+        fi
+        first_monitor=0
     else
         xrandr --output ${screen} --mode ${resolution}
     fi
