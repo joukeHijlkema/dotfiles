@@ -52,9 +52,12 @@ op.add_option("-o", "--once", action = "store_true",
 op.add_option("-s", "--view", action = "store_true",
               dest = "view", default = False,
               help = "start viewer after first successful compilation")
-op.add_option("-l", "--helvetica", action = "store_true",
+op.add_option("--helvetica", action = "store_true",
               dest = "helvetica", default = False,
               help = "use helvetica font")
+op.add_option("--root-improvements", action = "store_true",
+              dest = "root", default = False,
+              help = "apply some tweaks to improve rendering from ROOT pictures")
 
 options, args = op.parse_args()
 tikzName, = args # exactly one filename expected
@@ -67,17 +70,14 @@ except IOError:
 basename = os.path.splitext(tikzName)[0]
 ext      = os.path.splitext(tikzName)[1]
 
-# # Check if extension is not already '.tex' (ROOT do it)
-# if ext == '.tex':
-#         os.rename (tikzName, basename + ".tikz")
-#         send_message ("Rename " + tikzName + " into " + basename + ".tikz")
-#         tikzName = basename + ".tikz"
-
 # Remove underscore
 tmp = open(tikzName + '.tmp', 'w')
 with open(tikzName, 'rw+') as origfile:
-    for line in origfile:
-            tmp.write (line.replace('_', '-'))
+        for line in origfile:
+                newline = line.replace('_', '-')
+                if options.root:
+                        newline = newline.replace(',mark size=1pt','')
+                tmp.write (newline)
 tmp.close ()
 os.rename (tikzName + '.tmp', tikzName)
 
@@ -100,7 +100,6 @@ template = r"""
 \usepackage{tikz,nicefrac,amsmath,pifont,units}
 \usetikzlibrary{positioning,arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
 
-%%\usepackage[graphics,tightpage,active]{preview}
 \usepackage{upgreek}
 \usepackage{comment}
 \usepackage{multirow}
@@ -109,7 +108,7 @@ if options.helvetica:
         template += r"""
 \usepackage[T1]{fontenc}
 \usepackage[scaled]{helvet}
-\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\renewcommand*\familydefault{\sfdefault}
 """
 template += r"""
 \begin{document}
