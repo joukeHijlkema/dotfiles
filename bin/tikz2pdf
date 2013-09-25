@@ -34,13 +34,20 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import sys, os.path, subprocess, glob, time, optparse, tempfile
+import sys, os.path, subprocess, glob, time, optparse, tempfile, pynotify
+pynotify.init(sys.argv[0])
+
+def send_message (message, icon='stock_dialog-info'):
+        print message
+        notice = pynotify.Notification("tikz2pdf", message, icon)
+        notice.show()
+        return
 
 op = optparse.OptionParser(usage="%prog [options] foo.tikz")
 op.add_option("-v", "--verbose", action = "store_true", default = False,
               dest = "verbose", help = "verbose output")
 op.add_option("-o", "--once", action = "store_true",
-              dest = "once", default = True,
+              dest = "once", default = False,
               help = "only convert once, then clean up temporary files and quit")
 op.add_option("-s", "--view", action = "store_true",
               dest = "view", default = False,
@@ -51,20 +58,32 @@ op.add_option("-l", "--helvetica", action = "store_true",
 
 options, args = op.parse_args()
 tikzName, = args # exactly one filename expected
+try:
+        with open(tikzName): pass
+except IOError:
+        send_message ('File ' + tikzName + ' does not exist', 'stock_dialog-error')
+        sys.exit ()
 
 basename = os.path.splitext(tikzName)[0]
+ext      = os.path.splitext(tikzName)[1]
+
+# # Check if extension is not already '.tex' (ROOT do it)
+# if ext == '.tex':
+#         os.rename (tikzName, basename + ".tikz")
+#         send_message ("Rename " + tikzName + " into " + basename + ".tikz")
+#         tikzName = basename + ".tikz"
+
+# Remove underscore
+tmp = open(tikzName + '.tmp', 'w')
+with open(tikzName, 'rw+') as origfile:
+    for line in origfile:
+            tmp.write (line.replace('_', '-'))
+tmp.close ()
+os.rename (tikzName + '.tmp', tikzName)
+
 texName = basename + ".tex"
 pdfName = basename + ".pdf"
 
-templateFilename = os.path.expanduser("~/.tikz2pdf.tex")
-searchDir = os.getcwd()
-# while searchDir != "/":
-# 	candidate = os.path.join(searchDir, ".tikz2pdf.tex")
-# 	if os.path.exists(candidate):
-# 		templateFilename = candidate
-# 		sys.stdout.write("Using template %r.\n" % candidate)
-# 		break
-# 	searchDir = os.path.split(searchDir)[0]
 
 # re-use texdoc's configuration variables for viewing TeX's output:
 viewCommand = "evince %r"
@@ -72,11 +91,9 @@ texdocViewCommand = os.environ.get("TEXDOCVIEW_pdf", None)
 if texdocViewCommand:
 	viewCommand = texdocViewCommand.rstrip("&").replace("%s", "%r")
 
-#if os.path.exists(templateFilename):
-if False:
-	template = file(templateFilename).read()
-else:
-	template = r"""\documentclass[convert]{standalone}
+template = r"""
+\nonstopmode
+\documentclass[convert]{standalone}
 
 \usepackage{lmodern}
 \usepackage[eulergreek]{sansmath}
@@ -87,34 +104,30 @@ else:
 \usepackage{upgreek}
 \usepackage{comment}
 \usepackage{multirow}
-%%\PreviewEnvironment{tikzpicture}
-%%\newlength{\imagewidth}
-%%\newlength{\imagescale}
 """
-        if options.helvetica:
-                template += r"""
+if options.helvetica:
+        template += r"""
 \usepackage[T1]{fontenc}
 \usepackage[scaled]{helvet}
 \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 """
-        template += r"""
+template += r"""
 \begin{document}
+\sf
 \sansmath
 \input{%s}
 
 \end{document}
 """
-	sys.stderr.write("INFO: '%s' did not exist, saving default template - please configure!\n" % templateFilename)
-	file(templateFilename, "w").write(template)
 
-file(texName, "w").write(template % tikzName)
+file (texName, 'w').write (template % tikzName)
 
-def verboseUnlink(filename):
+def verboseUnlink (filename):
 	# FIXME: check mtime
 	if options.verbose:
 		print "cleaning up %r..." % filename
 	try:
-		os.unlink(filename)
+		os.unlink (filename)
 	except OSError, e:
 		if e.errno != 2:
 			raise e
@@ -127,18 +140,18 @@ while True:
 		mtime = os.path.getmtime(tikzName)
 		if mtime > previous:
 			out = None
-			print "tikz2pdf: calling pdflatex..."
+                        send_message ("Processing %r file" % tikzName)
 			if not options.verbose:
 				out = tempfile.TemporaryFile()
                                 ec = subprocess.call(
-                                        ["pdflatex", "-halt-on-error", "-shell-escape", texName], stdout = out)
+                                        ["xelatex", "-halt-on-error", "-shell-escape", texName], stdout = out)
 			if ec:
 				if out:
 					out.seek(0)
 					sys.stdout.write(out.read())
-				print "tikz2pdf: ERROR generating %r with pdflatex." % pdfName
+                                send_message ("Error generating %r." % pdfName, "stock_dialog-error")
 			else:
-				print "tikz2pdf: Successfully generated %r." % pdfName
+                                send_message ("Successfully generated %r." % pdfName)
 				if options.view and viewer is None:
 					print "tikz2pdf: starting viewer..."
 					viewer = subprocess.Popen(viewCommand % pdfName, shell = True)
@@ -153,7 +166,7 @@ while True:
 		verboseUnlink(pdfName)
 		break
 
-# verboseUnlink(texName)
+verboseUnlink(texName)
 # for temp in glob.glob("tikz2pdf_temp.*"):
 # 	if temp != pdfName:
 # 		verboseUnlink(temp)
