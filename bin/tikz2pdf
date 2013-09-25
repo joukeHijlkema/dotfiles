@@ -58,6 +58,9 @@ op.add_option("--helvetica", action = "store_true",
 op.add_option("--root-improvements", action = "store_true",
               dest = "root", default = False,
               help = "apply some tweaks to improve rendering from ROOT pictures")
+op.add_option("--png", action = "store_true",
+              dest = "png", default = False,
+              help = "also produce PNG image")
 
 options, args = op.parse_args()
 tikzName, = args # exactly one filename expected
@@ -74,10 +77,10 @@ ext      = os.path.splitext(tikzName)[1]
 tmp = open(tikzName + '.tmp', 'w')
 with open(tikzName, 'rw+') as origfile:
         for line in origfile:
-                newline = line.replace('_', '-')
+                #newline = line.replace('_', '-')
                 if options.root:
-                        newline = newline.replace(',mark size=1pt','')
-                tmp.write (newline)
+                        newline = line.replace(',mark size=1pt','')
+                        tmp.write (newline)
 tmp.close ()
 os.rename (tikzName + '.tmp', tikzName)
 
@@ -93,8 +96,16 @@ if texdocViewCommand:
 
 template = r"""
 \nonstopmode
+"""
+if options.png:
+        template +=r"""
 \documentclass[convert]{standalone}
-
+"""
+else:
+        template +=r"""
+\documentclass{standalone}
+"""
+template += r"""
 \usepackage{lmodern}
 \usepackage[eulergreek]{sansmath}
 \usepackage{tikz,nicefrac,amsmath,pifont,units}
