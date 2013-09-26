@@ -190,7 +190,7 @@ while True:
 		break
 
 verboseUnlink(texName)
-#verboseUnlink(tmpName)
+verboseUnlink(tmpName)
 # for temp in glob.glob("tikz2pdf_temp.*"):
 # 	if temp != pdfName:
 # 		verboseUnlink(temp)
