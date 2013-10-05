@@ -137,7 +137,6 @@ def generate_template ():
         \input{%s}
         \end{document}
         """
-        send_message ("File %r" % tmpName)
         file (texName, 'w').write (template % tmpName)
 
 def verboseUnlink (filename):
