@@ -79,71 +79,66 @@ tmpName = basename + '.tmp'
 texName = basename + '.tex'
 pdfName = basename + '.pdf'
 
-tmp = open(tmpName, 'w')
-with open(tikzName, 'rw+') as origfile:
-        for line in origfile:
-                #newline = line.replace('_', '-')
-                newline = line
-                if options.root:
-                        newline = newline.replace(',mark size=1pt','')
-                if options.xkcd:
-                        newline = newline.replace('\\begin{tikzpicture}','\\begin{tikzpicture}[decoration={random steps,segment length=1mm,amplitude=0.2pt}]')
-                tmp.write(newline)
-tmp.close ()
+def generate_tmp_file ():
+        tmp = open(tmpName, 'w')
+        with open(tikzName, 'rw+') as f:
+                for line in f:
+                        #newline = line.replace('_', '-')
+                        newline = line
+                        if options.root:
+                                newline = newline.replace(',mark size=1pt','')
+                        if options.xkcd:
+                                newline = newline.replace('\\begin{tikzpicture}','\\begin{tikzpicture}[decoration={random steps,segment length=1mm,amplitude=0.2pt}]')
+                        tmp.write(newline)
+        tmp.close ()
+        if options.xkcd:
+                ec = subprocess.call(['sed', '-i', '-e', '/^\\\\draw/s/\]/,decorate,thick]/', tmpName])
 
-if options.xkcd:
-        ec = subprocess.call(['sed', '-i', '-e', '/^\\\\draw/s/\]/,decorate,thick]/', tmpName])
-
-# re-use texdoc's configuration variables for viewing TeX's output:
-viewCommand = "evince %r"
-texdocViewCommand = os.environ.get("TEXDOCVIEW_pdf", None)
-if texdocViewCommand:
-	viewCommand = texdocViewCommand.rstrip("&").replace("%s", "%r")
-
-template = r"""
-\nonstopmode
-"""
-if options.png:
-        template +=r"""
-\documentclass[convert]{standalone}
-"""
-else:
-        template +=r"""
-\documentclass{standalone}
-"""
-template += r"""
-\usepackage{lmodern}
-\usepackage[eulergreek]{sansmath}
-\usepackage{tikz,nicefrac,amsmath,pifont,units}
-\usetikzlibrary{positioning,arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
-
-\usepackage{pgfplots}
-\usepackage{upgreek}
-\usepackage{comment}
-\usepackage{multirow}
-"""
-if options.xkcd:
+def generate_template ():
+        template = r"""
+        \nonstopmode
+        """
+        if options.png:
+                template +=r"""
+                \documentclass[convert]{standalone}
+                """
+        else:
+                template +=r"""
+                \documentclass{standalone}
+                """
         template += r"""
-\usepackage{mathspec}
-\setmainfont{Humor Sans}
-\setsansfont{Humor Sans}
-\setmathsfont(Digits,Latin,Greek)[Numbers={Lining,Proportional}]{Humor Sans}
-"""
-if options.helvetica:
-        template += r"""
-\usepackage[T1]{fontenc}
-\usepackage[scaled]{helvet}
-\renewcommand*\familydefault{\sfdefault}
-"""
-template += r"""
-\begin{document}
-\sf
-\sansmath
-\input{%s}
-\end{document}
-"""
+        \usepackage{lmodern}
+        \usepackage[eulergreek]{sansmath}
+        \usepackage{tikz,nicefrac,amsmath,pifont,units}
+        \usetikzlibrary{positioning,arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
 
-file (texName, 'w').write (template % tmpName)
+        \usepackage{pgfplots}
+        \usepackage{upgreek}
+        \usepackage{comment}
+        \usepackage{multirow}
+        """
+        if options.xkcd:
+                template += r"""
+                \usepackage{mathspec}
+                \setmainfont{Humor Sans}
+                \setsansfont{Humor Sans}
+                \setmathsfont(Digits,Latin,Greek)[Numbers={Lining,Proportional}]{Humor Sans}
+                """
+        if options.helvetica:
+                template += r"""
+                \usepackage[T1]{fontenc}
+                \usepackage[scaled]{helvet}
+                \renewcommand*\familydefault{\sfdefault}
+                """
+        template += r"""
+        \begin{document}
+        \sf
+        \sansmath
+        \input{%s}
+        \end{document}
+        """
+        send_message ("File %r" % tmpName)
+        file (texName, 'w').write (template % tmpName)
 
 def verboseUnlink (filename):
 	# FIXME: check mtime
@@ -156,6 +151,11 @@ def verboseUnlink (filename):
 			raise e
 
 viewer = None
+# re-use texdoc's configuration variables for viewing TeX's output:
+viewCommand = "evince %r"
+texdocViewCommand = os.environ.get("TEXDOCVIEW_pdf", None)
+if texdocViewCommand:
+        viewCommand = texdocViewCommand.rstrip("&").replace("%s", "%r")
 
 previous = 0
 while True:
@@ -164,6 +164,8 @@ while True:
 		if mtime > previous:
 			out = None
                         send_message ("Processing %r file" % tikzName)
+                        generate_tmp_file ()
+                        generate_template ()
 			if not options.verbose:
 				out = tempfile.TemporaryFile()
                                 ec = subprocess.call(
@@ -186,9 +188,7 @@ while True:
 				break
 		time.sleep(1)
 	except KeyboardInterrupt:
-		verboseUnlink(pdfName)
-		break
-
+                break
 verboseUnlink(texName)
 verboseUnlink(tmpName)
 # for temp in glob.glob("tikz2pdf_temp.*"):
