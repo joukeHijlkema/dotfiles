@@ -19,7 +19,7 @@
   split_horiz = <Super>h
   prev_tab = <Super>Left
   move_tab_right = <Shift><Control>Page_Up
-  close_term = <Super>w
+  close_term = <Ctrl><Shift>k
   split_vert = <Super>l
   go_right = <Super>Right
   new_tab = <Ctrl><Shift>t

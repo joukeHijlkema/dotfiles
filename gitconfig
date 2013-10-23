@@ -6,7 +6,7 @@
 [push]
 	default = simple
 [alias]
-        lg = log --graph --decorate --pretty=short
+        lg = log --graph --decorate --abbrev-commit --pretty=short
         ci = svn dcommit
         merge = merge --squash
         st = status -sb
