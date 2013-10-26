@@ -10,5 +10,6 @@
         ci = svn dcommit
         merge = merge --squash
         st = status -sb
+        co = checkout
 [diff]
 	tool = meld
