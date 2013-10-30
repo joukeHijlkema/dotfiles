@@ -10,7 +10,7 @@
 # Last modified : 2013-01-30
 #
 
-appname="netcfg_post_up"
+appname="npu"
 
 function send_notification ()
 {
