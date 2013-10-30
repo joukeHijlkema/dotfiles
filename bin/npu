@@ -7,7 +7,9 @@
 #
 # Author(s)     : Xavier Garrido <<garrido@lal.in2p3.fr>>
 # Creation date : 2013-01-13
-# Last modified : 2013-01-30
+# Last modified : 2013-10-30
+#
+# 2013-10-30 : Changing name to npu
 #
 
 appname="npu"
@@ -69,11 +71,11 @@ function set_local_tunnel ()
 
 function set_ssh_tunnel ()
 {
+    kill_ssh_tunnel
     if ! ping_machine; then
         return 1
     fi
 
-    kill_ssh_tunnel
     local name_server=$(cat /etc/resolv.conf | \
         grep --max-count=1 nameserver | cut -d' ' -f2)
     if [ ${name_server} = 192.168.1.1 ]; then
