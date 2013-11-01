@@ -316,12 +316,12 @@
         <command>/home/garrido/.config/openbox/scripts/volume mute</command>
       </action>
     </keybind>
-    <keybind key="W-p">
+    <keybind key="XF86MonBrightnessUp">
       <action name="Execute">
         <command>/usr/bin/xbacklight +50</command>
       </action>
     </keybind>
-    <keybind key="W-m">
+    <keybind key="XF86MonBrightnessDown">
       <action name="Execute">
         <command>/usr/bin/xbacklight -50</command>
       </action>
