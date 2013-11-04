@@ -1,2 +1,2 @@
 #!/bin/bash
-emacsclient -a "" -c -n -e "(sk-desktop)" "$@"
+emacsclient -a "" -c -n "$@"
