@@ -45,7 +45,7 @@ function ping_machine ()
 function kill_ssh_tunnel ()
 {
     local is_setup=$(ps aux | grep "$ssh_port:localhost:22" \
-                            | grep -v grep | awk '{print $2}')
+        | grep -v grep | awk '{print $2}')
     if [ "x${is_setup}" != "x" ]; then
         for id in ${is_setup}; do kill -9 $id;done
     fi
@@ -99,7 +99,7 @@ function main ()
         machine_name=$1
         ssh_port=$(cat ${tmp_file} | grep ${machine_name} | cut -d' ' -f2)
         if [ -x ${ssh_port} ]; then
-            last_port=$(cat ${tmp_file} | tail | cut -d ' ' -f2)
+            last_port=$(cat ${tmp_file} | tail -1 | cut -d ' ' -f2)
             if [ -x ${last_port} ]; then
                 ssh_port=6261
             else
