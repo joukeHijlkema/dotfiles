@@ -76,7 +76,7 @@ except IOError:
 basename = os.path.splitext(tikzName)[0]
 
 tmpName = basename + '.tmp'
-texName = basename + '.tex'
+texName = basename + '.ttex'
 pdfName = basename + '.pdf'
 
 def generate_tmp_file ():
