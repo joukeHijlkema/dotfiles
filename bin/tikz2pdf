@@ -116,6 +116,9 @@ def generate_template ():
         \usepackage{upgreek}
         \usepackage{comment}
         \usepackage{multirow}
+        \usepackage{relsize}
+        \usepackage[detect-family]{siunitx}
+        \sisetup{text-sf=\sansmath}
         """
         if options.xkcd:
                 template += r"""

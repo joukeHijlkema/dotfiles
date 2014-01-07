@@ -1,0 +1,57 @@
+#!/usr/bin/env python2.7
+
+import sys, os.path, subprocess, glob, time, optparse, tempfile, pynotify
+pynotify.init(sys.argv[0])
+
+def send_message (message, icon='stock_dialog-info'):
+        print message
+        notice = pynotify.Notification("tikz2pdf", message, icon)
+        notice.show()
+        return
+
+op = optparse.OptionParser(usage="%prog [options] foo.tikz")
+op.add_option('-v', '--verbose', default = False,
+              help = 'verbose output')
+op.add_option('-c', '--command',
+              dest = 'command', default = '')
+op.add_option('-o', '--once', action = 'store_true',
+              dest = 'once', default = False,
+              help = 'only convert once, then clean up temporary files and quit')
+
+options, args = op.parse_args()
+fileName, = args # exactly one filename expected
+try:
+        with open(fileName): pass
+except IOError:
+        send_message ('File ' + fileName + ' does not exist', 'stock_dialog-error')
+        sys.exit ()
+
+
+print options.command
+
+previous = 0
+while True:
+	try:
+		mtime = os.path.getmtime(fileName)
+		if mtime > previous:
+			out = None
+                        send_message ("Change in %r file" % fileName)
+			if not options.verbose:
+				out = tempfile.TemporaryFile()
+                                ec = subprocess.call('make clean', shell=True, stdout = out)
+			if ec:
+				if out:
+					out.seek(0)
+					sys.stdout.write(out.read())
+                                send_message ("Error generating command %r" % options.command, "stock_dialog-error")
+			else:
+                                send_message ("Successfully generating command %r" % options.command)
+			if out:
+				out.close()
+
+			previous = mtime
+			if options.once:
+				break
+		time.sleep(1)
+	except KeyboardInterrupt:
+                break
