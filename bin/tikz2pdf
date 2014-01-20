@@ -109,7 +109,7 @@ def generate_template ():
         template += r"""
         \usepackage{lmodern}
         \usepackage[eulergreek]{sansmath}
-        \usepackage{tikz,nicefrac,amsmath,pifont,units}
+        \usepackage{tikz,nicefrac,amsmath,pifont,units,xspace}
         \usetikzlibrary{positioning,arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
 
         \usepackage{pgfplots}
