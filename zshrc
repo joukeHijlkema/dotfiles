@@ -31,6 +31,9 @@ antigen-bundle xgarrido/zsh-aggregator
 # Fabric utilities
 antigen-bundle xgarrido/zsh-fabric
 
+# Org-pages generation
+antigen-bundle xgarrido/zsh-org-pages
+
 # Load the theme.
 antigen-bundle xgarrido/zsh-themes
 antigen-theme xgarrido/zsh-themes nemo
