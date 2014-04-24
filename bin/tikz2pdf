@@ -109,16 +109,17 @@ def generate_template ():
         template += r"""
         \usepackage{lmodern}
         \usepackage[eulergreek]{sansmath}
-        \usepackage{tikz,nicefrac,amsmath,pifont,units,xspace}
+        \usepackage{tikz,tikz-3dplot,nicefrac,amsmath,amssymb,pifont,units,xspace}
         \usetikzlibrary{positioning,arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
 
         \usepackage{pgfplots}
+        \usetikzlibrary{pgfplots.groupplots}
         \usepackage{upgreek}
-        \usepackage{comment}
-        \usepackage{multirow}
-        \usepackage{relsize}
-        \usepackage[detect-family]{siunitx}
-        \sisetup{text-sf=\sansmath}
+	\usepackage{comment}
+	\usepackage{multirow}
+	\usepackage{relsize}
+	\usepackage[detect-family]{siunitx}
+	\sisetup{text-sf=\sansmath}
         """
         if options.xkcd:
                 template += r"""
