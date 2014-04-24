@@ -4,7 +4,7 @@
 # Window geometry
 padding.width: 2
 padding.height: 2
-border.width: 1
+border.width: 2
 window.client.padding.width: 0
 window.client.padding.height: 0
 window.handle.width: 0
@@ -34,7 +34,7 @@ window.*.title.bg: flat
 window.*.title.bg.color: #262626
 
 window.*.label.bg: Parentrelative
-window.active.label.text.color: #b5b5b5
+window.active.label.text.color: #B5B5B5
 window.inactive.label.text.color: #555
 
 window.*.button.unpressed.bg: Flat
@@ -56,7 +56,7 @@ window.*.button.hover.image.color: #666
 # Menus
 menu.title.bg: Flat
 menu.title.bg.color: #262626
-menu.title.text.color: #0A51AB
+menu.title.text.color: #B5B5B5
 menu.title.text.justify: left
 
 menu.separator.color: #262626
