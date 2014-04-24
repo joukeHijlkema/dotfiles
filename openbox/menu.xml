@@ -138,10 +138,10 @@
   <menu id="apps-term-menu"/>
   <menu id="apps-fileman-menu"/>
   <separator label="System" />
-  <menu id="pipe-wifi" label="Wifi"
-	execute="sudo /home/garrido/.config/openbox/scripts/wifi-pipe wlan0"/>
-  <menu id="pipe-udiskie" label="USB drives"
-	execute="sudo /home/garrido/.config/openbox/scripts/devmon-pipe"/>
+  <!-- <menu id="pipe-wifi" label="Wifi" -->
+  <!--       execute="sudo /home/garrido/.config/openbox/scripts/wifi-pipe wlan0"/> -->
+  <!-- <menu id="pipe-udiskie" label="USB drives" -->
+  <!--       execute="sudo /home/garrido/.config/openbox/scripts/devmon-pipe"/> -->
   <menu id="system-menu"/>
   <separator />
   <item label="Log Out">
