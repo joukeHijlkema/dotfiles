@@ -292,7 +292,7 @@
         <command>/home/garrido/.config/openbox/scripts/change-wallpaper</command>
       </action>
     </keybind>
-    <keybind key="A-t">
+    <keybind key="W-t">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
