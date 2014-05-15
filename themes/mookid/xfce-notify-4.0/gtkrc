@@ -4,13 +4,13 @@ style "notify-window"
     XfceNotifyWindow::border-color = "#ffffff"
     XfceNotifyWindow::border-radius = 10.0
     XfceNotifyWindow::border-width = 0.0
-    bg[NORMAL] = "#111"
+    bg[NORMAL] = "#ffffff"
 }
 
 style "notify-button"
 {
     bg[NORMAL] = "#202020"
-    bg[PRELIGHT] = "#404040"
+    bg[PRELIGHT] = "#202020"
     fg[NORMAL] = "#ffffff"
     fg[PRELIGHT] = "#ffffff"
     engine "murrine" {
