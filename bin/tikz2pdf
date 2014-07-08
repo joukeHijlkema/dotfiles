@@ -118,7 +118,7 @@ def generate_template ():
 	\usepackage{comment}
 	\usepackage{multirow}
 	\usepackage{relsize}
-	\usepackage[detect-family]{siunitx}
+	\usepackage[detect-family,separate-uncertainty=true]{siunitx}
 	\sisetup{text-sf=\sansmath}
         """
         if options.xkcd:
