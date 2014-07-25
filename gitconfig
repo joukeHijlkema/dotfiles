@@ -11,5 +11,6 @@
         merge = merge --squash
         st = status -sb
         co = checkout
+	stash-unapply = !git stash show -p | git apply -R
 [diff]
 	tool = meld
