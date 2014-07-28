@@ -39,14 +39,6 @@
     font = Ubuntu Mono 9
     background_color = "#fdf6e3"
     scrollback_infinite = True
-  [[default.bak]]
-    background_image = None
-    scrollbar_position = hidden
-    foreground_color = "#444342"
-    scroll_on_output = False
-    show_titlebar = False
-    background_color = "#ffffff"
-    scrollback_infinite = True
   [[nemo]]
     scrollbar_position = hidden
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#d33682:#859900:#b58900:#268bd2:#6c71c4:#93a1a1:#fdf6e3"
