@@ -108,9 +108,10 @@ def generate_template ():
                 """
         template += r"""
         \usepackage{lmodern}
+        \usepackage{fontspec}
         \usepackage[eulergreek]{sansmath}
         \usepackage{tikz,tikz-3dplot,nicefrac,amsmath,amssymb,pifont,units,xspace}
-        \usetikzlibrary{positioning,arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
+        \usetikzlibrary{positioning,arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy,trees}
 
         \usepackage{pgfplots}
         \usetikzlibrary{pgfplots.groupplots}
@@ -173,29 +174,29 @@ while True:
 				out = tempfile.TemporaryFile()
                                 ec = subprocess.call(
                                         ["xelatex", "-halt-on-error", "-shell-escape", texName], stdout = out)
-			if ec:
-				if out:
-					out.seek(0)
-					sys.stdout.write(out.read())
-                                send_message ("Error generating %r." % pdfName, "stock_dialog-error")
-			else:
-                                send_message ("Successfully generated %r." % pdfName)
-				if options.view and viewer is None:
-					print "tikz2pdf: starting viewer..."
-					viewer = subprocess.Popen(viewCommand % pdfName, shell = True)
-			if out:
-				out.close()
+                                if ec:
+                                        if out:
+                                                out.seek(0)
+                                                sys.stdout.write(out.read())
+                                                send_message("Error generating %r." % pdfName, "stock_dialog-error")
+                                else:
+                                        send_message ("Successfully generated %r." % pdfName)
+                                        if options.view and viewer is None:
+                                                print "tikz2pdf: starting viewer..."
+                                                viewer = subprocess.Popen(viewCommand % pdfName, shell = True)
+                                if out:
+                                        out.close()
 
-			previous = mtime
-			if options.once:
-				break
+                                previous = mtime
+                                if options.once:
+                                        break
 		time.sleep(1)
 	except KeyboardInterrupt:
                 break
 verboseUnlink(texName)
 verboseUnlink(tmpName)
-# for temp in glob.glob("tikz2pdf_temp.*"):
-# 	if temp != pdfName:
-# 		verboseUnlink(temp)
+for temp in glob.glob("tikz2pdf_temp.*"):
+	if temp != pdfName:
+		verboseUnlink(temp)
 for ext in (".aux", ".log", ".pgf-plot.gnuplot", ".pgf-plot.table"):
 	verboseUnlink(basename + ext)
