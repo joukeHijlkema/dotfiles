@@ -1,6 +1,12 @@
 #!/bin/bash
 
 dir_wallpaper="/home/garrido/Images/Wallpapers"
+
+(
+    cd ${dir_wallpaper}
+    ./generate_random_filename.sh
+)
+
 wallpaper=$(find "${dir_wallpaper}" -maxdepth 1 -mindepth 1 -type f -print0 -name "*.jpg" | \
     sort --zero-terminated --random-sort | sed 's/\d000.*//g')
 
