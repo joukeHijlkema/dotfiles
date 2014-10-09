@@ -1,6 +1,6 @@
 [global_config]
   handle_size = 1
-  enabled_plugins = CustomCommandsMenu, InactivityWatch, ActivityWatch, APTURLHandler
+  enabled_plugins = CustomCommandsMenu, InactivityWatch, ActivityWatch, TerminalShot, APTURLHandler, Logger
   focus = system
   title_transmit_fg_color = "#c0bebf"
   title_inactive_fg_color = "#c0bebf"
