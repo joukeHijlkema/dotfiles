@@ -1,0 +1,7 @@
+
+[Development/dotfiles]
+checkout = git clone 'git@github.com:xgarrido/dotfiles' 'dotfiles'
+
+[Development/org-website]
+checkout = git clone 'git@github.com:xgarrido/org-website.git' 'org-website'
+publish = make publish
