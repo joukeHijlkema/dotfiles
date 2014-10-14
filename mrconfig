@@ -17,3 +17,25 @@ checkout = git clone 'git@github.com:xgarrido/d3-change-org.git' 'd3-change.org'
 [Development/org-lal-website]
 checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-lal-website' 'org-lal-website'
 publish = make publish
+
+[Development/latex-templates]
+checkout = git clone 'git@github.com:xgarrido/latex-templates.git' 'latex-templates'
+
+[Development/org-resume]
+checkout = git clone 'git@github.com:xgarrido/org-resume.git' 'org-resume'
+publish = make publish
+
+[Development/pygments-styles]
+checkout = git clone 'git@github.com:xgarrido/pygments-styles.git' 'pygments-styles'
+
+[.emacs.d]
+checkout = git clone 'git@github.com:xgarrido/emacs-starter-kit.git' '.emacs.d'
+publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
+
+[Teachdir/EM/td]
+checkout = git clone 'git@github.com:xgarrido/licence_em_teaching.git' 'td'
+publish = make publish
+
+[Teachdir/NP/td]
+checkout = git clone 'git@github.com:xgarrido/master_npp_teaching.git' 'td'
+publish = make publish
