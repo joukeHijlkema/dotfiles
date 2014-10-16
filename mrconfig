@@ -18,6 +18,10 @@ checkout = git clone 'git@github.com:xgarrido/d3-change-org.git' 'd3-change.org'
 checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-lal-website' 'org-lal-website'
 publish = make publish
 
+[Development/org-notes]
+checkout = git clone 'git@github.com:xgarrido/org-notes.git' 'org-notes'
+publish = make publish
+
 [Development/latex-templates]
 checkout = git clone 'git@github.com:xgarrido/latex-templates.git' 'latex-templates'
 
@@ -39,3 +43,18 @@ publish = make publish
 [Teachdir/NP/td]
 checkout = git clone 'git@github.com:xgarrido/master_npp_teaching.git' 'td'
 publish = make publish
+
+[.config/zsh/antigen]
+checkout = git clone 'https://github.com/zsh-users/antigen.git' 'antigen'
+
+[Documents/Work]
+checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Documents/Work' 'Work'
+
+[Workdir/NEMO/supernemo/simulations/snemo_simulation_modules]
+checkout = git clone 'git@github.com:xgarrido/snemo_simulation_modules.git' 'snemo_simulation_modules'
+
+[Workdir/NEMO/supernemo/simulations/snemo_simulation_configuration]
+checkout = git clone 'git@github.com:xgarrido/snemo_simulation_configuration.git' 'snemo_simulation_configuration'
+
+[Workdir/NEMO/supernemo/simulations/bayeux_simulation_modules]
+checkout = git clone 'git@github.com:xgarrido/bayeux_simulation_modules.git' 'bayeux_simulation_modules'
