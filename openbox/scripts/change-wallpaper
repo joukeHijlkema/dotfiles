@@ -13,3 +13,4 @@ wallpaper=$(find "${dir_wallpaper}" -maxdepth 1 -mindepth 1 -type f -print0 -nam
 ln -sf ${wallpaper} ${dir_wallpaper}/default
 
 hsetroot -fill ${dir_wallpaper}/default &
+notify-send -i wallpaper "Change wallpaper" "changing wallpaper to ${wallpaper}"
