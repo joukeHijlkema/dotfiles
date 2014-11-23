@@ -54,7 +54,7 @@
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
   -->
-    <keepBorder>yes</keepBorder>
+    <keepBorder>no</keepBorder>
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>Ubuntu</name>
@@ -267,7 +267,7 @@
       </action>
     </keybind>
     <!-- Keybindings for running applications -->
-    <keybind key="A-0x31">
+    <keybind key="W-0x31">
       <!-- <keybind key="W-Tab"> -->
       <action name="Execute">
         <startupnotify>
