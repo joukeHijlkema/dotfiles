@@ -58,3 +58,23 @@ checkout = git clone 'git@github.com:xgarrido/snemo_simulation_configuration.git
 
 [Workdir/NEMO/supernemo/simulations/bayeux_simulation_modules]
 checkout = git clone 'git@github.com:xgarrido/bayeux_simulation_modules.git' 'bayeux_simulation_modules'
+
+[Development/github/cask]
+checkout = git clone 'https://github.com/cask/cask.git' 'cask'
+
+[Development/github/org-mode]
+checkout = git clone 'git://orgmode.org/org-mode.git' 'org-mode'
+
+[.config/zsh/antigen-repo/repos/https-COLON--SLASH--SLASH-github.com-SLASH-xgarrido-SLASH-zsh-completions.git]
+checkout = git clone 'git@github.com:xgarrido/zsh-completions.git' 'https-COLON--SLASH--SLASH-github.com-SLASH-xgarrido-SLASH-zsh-completions.git'
+
+[.config/zsh/antigen-repo/repos/https-COLON--SLASH--SLASH-github.com-SLASH-xgarrido-SLASH-zsh-utilities.git]
+checkout = git clone 'git@github.com:xgarrido/zsh-utilities.git' 'https-COLON--SLASH--SLASH-github.com-SLASH-xgarrido-SLASH-zsh-utilities.git'
+publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
+
+[Development/org-caldav]
+checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-caldav' 'org-caldav'
+
+[Teachdir/C++]
+checkout = git clone 'git@github.com:xgarrido/master_cpp_teaching.git' 'C++'
+publish = make publish
