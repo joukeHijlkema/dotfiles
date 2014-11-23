@@ -22,8 +22,8 @@ antigen-bundle xgarrido/zsh-completions
 # Homemade utilities
 antigen-bundle xgarrido/zsh-utilities
 
-# SN@ilware utilities
-antigen-bundle xgarrido/zsh-snailware
+# # SN@ilware utilities
+# antigen-bundle xgarrido/zsh-snailware
 
 # SN@ilware aggregators
 antigen-bundle xgarrido/zsh-aggregator
