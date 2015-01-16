@@ -78,3 +78,7 @@ checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org
 [Teachdir/C++]
 checkout = git clone 'git@github.com:xgarrido/master_cpp_teaching.git' 'C++'
 publish = make publish
+
+[Workdir/Development/tikz-figures]
+checkout = git clone 'git@github.com:xgarrido/tikz-figures.git' 'tikz-figures'
+publish = zsh -i -c "org-pages publish --html --generate-github-link --debug --do-not-replace-pdf-ext"
