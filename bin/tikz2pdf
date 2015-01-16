@@ -193,6 +193,7 @@ while True:
 		time.sleep(1)
 	except KeyboardInterrupt:
                 break
+
 verboseUnlink(texName)
 verboseUnlink(tmpName)
 for temp in glob.glob("tikz2pdf_temp.*"):
