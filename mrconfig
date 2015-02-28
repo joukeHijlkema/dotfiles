@@ -50,14 +50,17 @@ checkout = git clone 'https://github.com/zsh-users/antigen.git' 'antigen'
 [Documents/Work]
 checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Documents/Work' 'Work'
 
-[Workdir/NEMO/supernemo/simulations/snemo_simulation_modules]
-checkout = git clone 'git@github.com:xgarrido/snemo_simulation_modules.git' 'snemo_simulation_modules'
+[Workdir/NEMO/supernemo/simulations/snemo_analysis_modules]
+checkout = git clone 'git@github.com:xgarrido/snemo_analysis_modules.git' 'snemo_analysis_modules'
+publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 
 [Workdir/NEMO/supernemo/simulations/snemo_simulation_configuration]
 checkout = git clone 'git@github.com:xgarrido/snemo_simulation_configuration.git' 'snemo_simulation_configuration'
+publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 
 [Workdir/NEMO/supernemo/simulations/bayeux_simulation_modules]
 checkout = git clone 'git@github.com:xgarrido/bayeux_simulation_modules.git' 'bayeux_simulation_modules'
+publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 
 [Development/github/cask]
 checkout = git clone 'https://github.com/cask/cask.git' 'cask'
@@ -81,4 +84,5 @@ publish = make publish
 
 [Workdir/Development/tikz-figures]
 checkout = git clone 'git@github.com:xgarrido/tikz-figures.git' 'tikz-figures'
+generate = zsh -i -c "org-pages generate --html --generate-github-link --debug --do-not-replace-pdf-ext"
 publish = zsh -i -c "org-pages publish --html --generate-github-link --debug --do-not-replace-pdf-ext"
