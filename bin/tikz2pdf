@@ -111,10 +111,11 @@ def generate_template ():
         \usepackage{fontspec}
         \usepackage[eulergreek]{sansmath}
         \usepackage{tikz,tikz-3dplot,circuitikz,nicefrac,amsmath,amssymb,pifont,units,xspace}
-        \usetikzlibrary{positioning,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy,trees}
+        \usetikzlibrary{positioning,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy,trees,decorations.markings}
 
         \usepackage{pgfplots}
-        \usetikzlibrary{pgfplots.groupplots}
+        \usepgfplotslibrary{polar}
+        \usetikzlibrary{pgfplots.groupplots,external}
         \usepackage{upgreek}
 	\usepackage{comment}
 	\usepackage{multirow}
