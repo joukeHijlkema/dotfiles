@@ -37,10 +37,11 @@
 import sys, os.path, subprocess, glob, time, optparse, tempfile, pynotify
 pynotify.init(sys.argv[0])
 
-def send_message (message, icon='stock_dialog-info'):
-        print message
-        notice = pynotify.Notification("tikz2pdf", message, icon)
-        notice.show()
+def send_message (message, icon='stock_dialog-info', quiet=False):
+        if not quiet:
+                print message
+                notice = pynotify.Notification("tikz2pdf", message, icon)
+                notice.show()
         return
 
 op = optparse.OptionParser(usage="%prog [options] foo.tikz")
@@ -64,6 +65,9 @@ op.add_option("--png", action = "store_true",
 op.add_option("--xkcd", action = "store_true",
               dest = "xkcd", default = False,
               help = "produce a plot using xkcd style")
+op.add_option("-q", "--quiet", action = "store_true",
+              dest = "quiet", default = False,
+              help = "run without any kind of popup notification")
 
 options, args = op.parse_args()
 tikzName, = args # exactly one filename expected
@@ -169,9 +173,9 @@ while True:
 		mtime = os.path.getmtime(tikzName)
 		if mtime > previous:
 			out = None
-                        send_message ("Processing %r file" % tikzName)
-                        generate_tmp_file ()
-                        generate_template ()
+                        send_message("Processing %r file" % tikzName, quiet=options.quiet)
+                        generate_tmp_file()
+                        generate_template()
 			if not options.verbose:
 				out = tempfile.TemporaryFile()
                                 ec = subprocess.call(
@@ -180,9 +184,9 @@ while True:
                                         if out:
                                                 out.seek(0)
                                                 sys.stdout.write(out.read())
-                                                send_message("Error generating %r." % pdfName, "stock_dialog-error")
+                                                send_message("Error generating %r." % pdfName, "stock_dialog-error", options.quiet)
                                 else:
-                                        send_message ("Successfully generated %r." % pdfName)
+                                        send_message("Successfully generated %r." % pdfName, quiet=options.quiet)
                                         if options.view and viewer is None:
                                                 print "tikz2pdf: starting viewer..."
                                                 viewer = subprocess.Popen(viewCommand % pdfName, shell = True)
