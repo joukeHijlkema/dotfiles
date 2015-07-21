@@ -117,7 +117,6 @@ def generate_template():
                 """
         template += r"""
         \usepackage{lmodern}
-        \usepackage{fontspec}
         \usepackage[eulergreek]{sansmath}
         \usepackage{tikz,tikz-3dplot,circuitikz,nicefrac,amsmath,amssymb,pifont,units,xspace}
         \usetikzlibrary{positioning,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy,trees,decorations.markings}
