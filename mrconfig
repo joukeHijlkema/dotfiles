@@ -44,6 +44,9 @@ publish = make publish
 checkout = git clone 'git@github.com:xgarrido/master_npp_teaching.git' 'td'
 publish = make publish
 
+[Teachdir/D2PFO]
+checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Teachdir/D2PFO' 'D2PFO'
+
 [.config/zsh/antigen]
 checkout = git clone 'https://github.com/zsh-users/antigen.git' 'antigen'
 
@@ -86,3 +89,6 @@ publish = make publish
 checkout = git clone 'git@github.com:xgarrido/tikz-figures.git' 'tikz-figures'
 generate = zsh -i -c "org-pages generate --html --generate-github-link --debug --do-not-replace-pdf-ext"
 publish = zsh -i -c "org-pages publish --html --generate-github-link --debug --do-not-replace-pdf-ext"
+
+[Development/github/ninja]
+checkout = git clone 'git@github.com:martine/ninja.git' 'ninja'

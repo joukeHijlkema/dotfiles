@@ -16,6 +16,8 @@ STATUS=$(amixer sget Master | awk '$0 ~ "Left:" { print $NF; }')
 
 if [ $STATUS = '[off]' ]; then
     ICON=audio-volume-muted-blocked-panel
+    msg="Switch off"
+    priority=critical
 else
     if [ $VOLUME -eq 0 ]; then
         ICON=audio-volume-off
@@ -26,7 +28,8 @@ else
     else
         ICON=audio-volume-high
     fi
+    msg="Current level"
+    priority=normal
 fi
-
-VOLUME="${VOLUME}%"
-notify-send " " "Current volume level ${VOLUME}" -i $ICON -t 1000
+# VOLUME="${VOLUME}%"
+notify-send "Volume" "${msg}" -h int:value:${VOLUME} -i $ICON -t 1000 -u ${priority}
