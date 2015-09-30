@@ -1,0 +1,84 @@
+#!/bin/zsh -i
+#-*- mode: shell-script; -*-
+#
+# Copyright (C) 2015 Xavier Garrido
+#
+# Author: garrido@lal.in2p3.fr
+# Keywords: website
+# Requirements: pkgtools
+# Status: not intended to be distributed yet
+
+# Set logging default values
+__pkgtools__default_values
+
+while [ -n "$1" ]; do
+    token="$1"
+    if [[ ${token} == "-h" || ${token} == "--help" ]]; then
+        return 0
+    elif [[ ${token} == "-d" || ${token} == "--debug" ]]; then
+	pkgtools__msg_using_debug
+    elif [[ ${token} == "-D" || ${token} == "--devel" ]]; then
+	pkgtools__msg_using_devel
+    elif [[ ${token} == "-v" || "${token}" == "--verbose" ]]; then
+	pkgtools__msg_using_verbose
+    elif [[ ${token} == "-W" || "${token}" == "--no-warning" ]]; then
+	pkgtools__msg_not_using_warning
+    elif [[ ${token} == "-q" || "${token}" == "--quiet" ]]; then
+	pkgtools__msg_using_quiet
+	export PKGTOOLS_MSG_QUIET=1
+    elif [[ ${token} == "--source" ]]; then
+        shift 1
+        source="$1"
+    elif [[ ${token} == "--destination" ]]; then
+        shift 1
+        destination="$1"
+    elif [[ ${token} == "--profile" ]]; then
+        shift 1
+        profile="$1"
+    fi
+    shift 1
+done
+
+if [ ! -z $profile ]; then
+    source="/home/garrido/"
+    if [[ $profile == "usb" ]]; then
+        pkgtools__msg_notice "Running backup into USB device"
+        if [ ! -d /media/backup ]; then
+            pkgtools__msg_error "USB device not connected !"
+            return 1
+        fi
+        [ -z $destination ] && destination="/media/backup"
+    elif [[ $profile == "lal" ]]; then
+        pkgtools__quietly_run "ping -q -c 1 nemo4"
+        if $(pkgtools__last_command_fails); then
+            pkgtools__msg_error "Computer not locally connected to LAL !"
+            return 1
+        fi
+        [ -z $destination ] && destination="garrido@lx3.lal.in2p3.fr:/exp/nemo/garrido/backup"
+    else
+        pkgtools__msg_error "Profile '$profile' is not know !"
+        return 1
+    fi
+
+    notify "Starting backup to ${profile}..."
+else
+    if [[ -z $destination || -z $source ]]; then
+        pkgtools__msg_error "Missing 'source' and/or 'destination' directories !"
+        return 1
+    fi
+    [ ! -d $destination ] && mkdir -p $destination
+    [ ! -d $source ] && mkdir -p $source
+    notify "Starting backup from ${source} to ${destination}..."
+fi
+
+logdir=/tmp/rsync.d
+logfile=$logdir/$(mktemp tmp.XXXXXXXXXX)
+[ ! -d $logdir ] && mkdir -p $logdir
+rsync-synchronize $source $destination > $logfile 2>&1
+if $(pkgtools__last_command_fails); then
+    pkgtools__msg_error "Backup fails ! Have a look inside $logfile log file"
+    notify_error "Backup fails !"
+    return 1
+fi
+
+notify "Backup sucessfully finished"
