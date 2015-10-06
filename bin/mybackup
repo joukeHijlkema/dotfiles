@@ -72,13 +72,16 @@ else
 fi
 
 logdir=/tmp/rsync.d
-logfile=$logdir/$(mktemp tmp.XXXXXXXXXX)
 [ ! -d $logdir ] && mkdir -p $logdir
-rsync-synchronize $source $destination > $logfile 2>&1
-if $(pkgtools__last_command_fails); then
-    pkgtools__msg_error "Backup fails ! Have a look inside $logfile log file"
-    notify_error "Backup fails !"
-    return 1
-fi
-
-notify "Backup sucessfully finished"
+(
+    cd $logdir
+    logfile=$(mktemp tmp.XXXXXXXXXX)
+    #rsync-synchronize $source $destination > $logfile 2>&1
+    if $(pkgtools__last_command_fails); then
+        pkgtools__msg_error "Backup fails ! Have a look inside $logdir/$logfile log file"
+        notify_error "Backup fails !"
+        return 1
+    fi
+    notify "Backup sucessfully finished"
+    notify "$(tail -n 2 $logfile)"
+)
