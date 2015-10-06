@@ -76,7 +76,7 @@ logdir=/tmp/rsync.d
 (
     cd $logdir
     logfile=$(mktemp tmp.XXXXXXXXXX)
-    #rsync-synchronize $source $destination > $logfile 2>&1
+    rsync-synchronize $source $destination > $logfile 2>&1
     if $(pkgtools__last_command_fails); then
         pkgtools__msg_error "Backup fails ! Have a look inside $logdir/$logfile log file"
         notify_error "Backup fails !"
