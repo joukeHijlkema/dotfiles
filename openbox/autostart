@@ -17,3 +17,5 @@ hsetroot -fill /home/garrido/Images/Wallpapers/default &
 xmodmap /home/garrido/.Xmodmap &
 # Running devmon to mount/umount media
 devmon &
+# Running dunst to send notification
+dunst &
