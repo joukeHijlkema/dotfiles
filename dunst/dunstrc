@@ -154,6 +154,7 @@
     # Otherwise the '#' and following would be interpreted as a comment.
     background = "#859900"
     foreground = "#FFFFFF"
+    timeout = 10
 
 [urgency_normal]
     background = "#268BD2"
