@@ -10,6 +10,9 @@ antigen-use oh-my-zsh
 antigen-bundle git
 antigen-bundle svn
 
+# Calc for zsh.
+antigen bundle arzzen/calc.plugin.zsh
+
 # Syntax highlighting bundle.
 antigen-bundle zsh-users/zsh-syntax-highlighting
 
