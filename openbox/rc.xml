@@ -282,6 +282,11 @@
         <command>/home/garrido/.config/openbox/scripts/dual-screen</command>
       </action>
     </keybind>
+    <keybind key="W-C">
+      <action name="Execute">
+        <command>/home/garrido/.config/openbox/scripts/dual-screen clone</command>
+      </action>
+    </keybind>
     <keybind key="W-S-c">
       <action name="Execute">
         <command>/home/garrido/.config/openbox/scripts/dual-screen clone</command>
@@ -299,6 +304,15 @@
           <name>terminator</name>
         </startupnotify>
         <command>terminator</command>
+      </action>
+    </keybind>
+    <keybind key="W-e">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>emacs</name>
+        </startupnotify>
+        <command>ec</command>
       </action>
     </keybind>
     <keybind key="XF86AudioRaiseVolume">
