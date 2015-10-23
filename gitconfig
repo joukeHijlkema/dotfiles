@@ -12,5 +12,9 @@
         st = status -sb
         co = checkout
 	stash-unapply = !git stash show -p | git apply -R
+        update = !git svn fetch && git svn rebase
 [diff]
 	tool = meld
+[github]
+	oauth-token = 20d3e921112e64dc1432a1f73b49154919d1cf69
+	user = xgarrido
