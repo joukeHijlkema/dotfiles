@@ -65,9 +65,6 @@ publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 checkout = git clone 'git@github.com:xgarrido/bayeux_simulation_modules.git' 'bayeux_simulation_modules'
 publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 
-[Development/github/cask]
-checkout = git clone 'https://github.com/cask/cask.git' 'cask'
-
 [Development/github/org-mode]
 checkout = git clone 'git://orgmode.org/org-mode.git' 'org-mode'
 
