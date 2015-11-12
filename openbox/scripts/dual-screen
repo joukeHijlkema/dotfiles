@@ -20,9 +20,6 @@ do
     fi
 done
 
-# Reset wallpaper
-/home/garrido/.config/openbox/scripts/change-wallpaper
-
 # Disable beep
 xset -b &
 
