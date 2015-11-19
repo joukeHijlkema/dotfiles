@@ -3578,6 +3578,8 @@ GtkBubbleWindow .toolbar {
 .window-frame {
     border-style: none;
     border-radius: 2px 2px 0 0;
+    box-shadow: none;
+    margin: 2px;
     /* box-shadow: 0 3px 7px 1px alpha(black, 0.7), */
     /*             0 0 0 1px mix(shade(@titlebar_bg_color, 0.7), @titlebar_fg_color, 0.21); */
 
