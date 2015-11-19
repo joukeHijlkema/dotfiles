@@ -1,0 +1,6 @@
+pc       -fstype=fuse,port=22,rw,allow_other :sshfs\#garrido@pc-91089.lal.in2p3.fr\:/
+nemo     -fstype=fuse,port=22,rw,allow_other :sshfs\#garrido@lx3.lal.in2p3.fr\:/exp/nemo
+data     -fstype=fuse,port=22,rw,allow_other :sshfs\#garrido@lx3.lal.in2p3.fr\:/data/nemo/data
+mac      -fstype=fuse,port=22,rw,allow_other :sshfs\#garrido@mac-garrido\:/Users/garrido
+syno     -fstype=fuse,port=22,rw,allow_other :sshfs\#garrido@xgarrido.synology.me\:
+owncloud -fstype=davfs,rw :https\://owncloud.lal.in2p3.fr/remote.php/webdav/
