@@ -1,9 +1,8 @@
 #!/bin/bash
 
+dir_wallpaper="/home/garrido/Images/Wallpapers"
 function use_random_wallpaper ()
 {
-    local dir_wallpaper="/home/garrido/Images/Wallpapers"
-
     (
         cd ${dir_wallpaper}
         ./generate_random_filename.sh
@@ -19,7 +18,7 @@ function use_random_wallpaper ()
 
 function use_default_wallpaper ()
 {
-    hsetroot -fill ${dir_wallpaper}/default &
+    hsetroot -fill ${dir_wallpaper}/others/default &
 }
 
 function set_pattern ()
@@ -41,7 +40,7 @@ function use_random_pattern ()
         ["#b58900"]="#7B6000"
         ["#cb4b16"]="#8B2C02"
         ["#dc322f"]="#990A1B"
-        # ["#d33682"]="#93115C"
+        ["#d33682"]="#93115C"
         ["#6c71c4"]="#3F4D91"
         ["#268bd2"]="#00629D"
         ["#2aa198"]="#00736F"
