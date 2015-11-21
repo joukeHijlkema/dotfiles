@@ -1,16 +1,83 @@
 #!/bin/bash
 
-dir_wallpaper="/home/garrido/Images/Wallpapers"
+function use_random_wallpaper ()
+{
+    local dir_wallpaper="/home/garrido/Images/Wallpapers"
 
-(
-    cd ${dir_wallpaper}
-    ./generate_random_filename.sh
-)
+    (
+        cd ${dir_wallpaper}
+        ./generate_random_filename.sh
+    )
 
-wallpaper=$(find "${dir_wallpaper}" -maxdepth 1 -mindepth 1 -type f -print0 -name "*.jpg" | \
-    sort --zero-terminated --random-sort | sed 's/\d000.*//g')
+    local wallpaper=$(find "${dir_wallpaper}" -maxdepth 1 -mindepth 1 -type f -print0 -name "*.jpg" | \
+                             sort --zero-terminated --random-sort | sed 's/\d000.*//g')
 
-ln -sf ${wallpaper} ${dir_wallpaper}/default
+    ln -sf ${wallpaper} ${dir_wallpaper}/default
 
-hsetroot -fill ${dir_wallpaper}/default &
-notify-send -i wallpaper "Change wallpaper" "changing wallpaper to ${wallpaper}"
+    hsetroot -fill ${dir_wallpaper}/default &
+}
+
+function use_default_wallpaper ()
+{
+    hsetroot -fill ${dir_wallpaper}/default &
+}
+
+function set_pattern ()
+{
+    cat << EOF > $1
+#define bg_width 16
+#define bg_height 16
+static unsigned char bg_bits[] = {
+   0x99, 0x99, 0x33, 0x33, 0x66, 0x66, 0xcc, 0xcc, 0x99, 0x99, 0x33, 0x33,
+   0x66, 0x66, 0xcc, 0xcc, 0x99, 0x99, 0x33, 0x33, 0x66, 0x66, 0xcc, 0xcc,
+   0x99, 0x99, 0x33, 0x33, 0x66, 0x66, 0xcc, 0xcc};
+EOF
+
+}
+
+function use_random_pattern ()
+{
+    declare -A color_table=(
+        ["#b58900"]="#7B6000"
+        ["#cb4b16"]="#8B2C02"
+        ["#dc322f"]="#990A1B"
+        # ["#d33682"]="#93115C"
+        ["#6c71c4"]="#3F4D91"
+        ["#268bd2"]="#00629D"
+        ["#2aa198"]="#00736F"
+        ["#859900"]="#546E00"
+    )
+    local size=${#color_table[@]}
+
+    local bgbitmap=/tmp/bgbitmap
+    if [ ! -f ${bgbitmap} ]; then
+        set_pattern ${bgbitmap}
+    fi
+    # local hour=$(date +%I)
+    # local idx=$(( $hour*$size/12 ))
+    local idx=$(shuf -i 0-$(( $size -1 )) -n 1)
+    if [[ ! -z $1 && $1 -lt $size ]]; then
+        idx=$1
+    fi
+    local keys=(${!color_table[@]})
+    local bg=${keys[$idx]}
+    local fg=${color_table[${keys[$idx]}]}
+    xsetroot -bitmap ${bgbitmap} -fg ${fg} -bg ${bg}
+}
+
+case $1 in
+    d|default|*)
+        use_default_wallpaper
+        ;;
+    p|pattern)
+        use_random_pattern
+        ;;
+    w|wallpaper)
+        use_random_wallpaper
+        ;;
+esac
+notify-send "Wallpaper changed"
+
+# Local Variables:
+# eval: (rainbow-mode)
+# End:
