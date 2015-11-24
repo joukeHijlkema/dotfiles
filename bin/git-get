@@ -44,6 +44,8 @@ fi
 dir=
 if [[ $gitaddress == *git@* ]]; then
     dir=$(echo ${gitaddress} | sed -e 's/git@//' -e 's/\.git//' -e 's/:/\//')
+elif [[ $gitaddress == *git://* ]]; then
+    dir=$(echo ${gitaddress} | sed -e 's/git:\/\///' -e 's/\.git//')
 elif [[ $gitaddress == *https* ]]; then
     dir=$(echo ${gitaddress} | sed -e 's/https:\/\///' -e 's/\.git//')
 else
