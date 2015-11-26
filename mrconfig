@@ -4,34 +4,6 @@ include = cat /usr/share/mr/git-svn
 # Teach mr how to `mr gc` in git repos.
 git_gc = git gc "$@"
 
-[Development/dotfiles]
-checkout = git clone 'git@github.com:xgarrido/dotfiles' 'dotfiles'
-
-[Development/org-website]
-checkout = git clone 'git@github.com:xgarrido/org-website.git' 'org-website'
-publish = make publish
-
-[Development/d3-change.org]
-checkout = git clone 'git@github.com:xgarrido/d3-change-org.git' 'd3-change.org'
-
-[Development/org-lal-website]
-checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-lal-website' 'org-lal-website'
-publish = make publish
-
-[Development/org-notes]
-checkout = git clone 'git@github.com:xgarrido/org-notes.git' 'org-notes'
-publish = make publish
-
-[Development/latex-templates]
-checkout = git clone 'git@github.com:xgarrido/latex-templates.git' 'latex-templates'
-
-[Development/org-resume]
-checkout = git clone 'git@github.com:xgarrido/org-resume.git' 'org-resume'
-publish = make publish
-
-[Development/pygments-styles]
-checkout = git clone 'git@github.com:xgarrido/pygments-styles.git' 'pygments-styles'
-
 [.emacs.d]
 checkout = git clone 'git@github.com:xgarrido/emacs-starter-kit.git' '.emacs.d'
 publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
@@ -65,9 +37,6 @@ publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 checkout = git clone 'git@github.com:xgarrido/bayeux_simulation_modules.git' 'bayeux_simulation_modules'
 publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 
-[Development/github/org-mode]
-checkout = git clone 'git://orgmode.org/org-mode.git' 'org-mode'
-
 [.config/zsh/antigen-repo/repos/https-COLON--SLASH--SLASH-github.com-SLASH-xgarrido-SLASH-zsh-completions.git]
 checkout = git clone 'git@github.com:xgarrido/zsh-completions.git' 'https-COLON--SLASH--SLASH-github.com-SLASH-xgarrido-SLASH-zsh-completions.git'
 
@@ -75,17 +44,48 @@ checkout = git clone 'git@github.com:xgarrido/zsh-completions.git' 'https-COLON-
 checkout = git clone 'git@github.com:xgarrido/zsh-utilities.git' 'https-COLON--SLASH--SLASH-github.com-SLASH-xgarrido-SLASH-zsh-utilities.git'
 publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 
-[Development/org-caldav]
-checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-caldav' 'org-caldav'
-
 [Teachdir/C++]
 checkout = git clone 'git@github.com:xgarrido/master_cpp_teaching.git' 'C++'
 publish = make publish
 
-[Workdir/Development/tikz-figures]
+[Development/github.com/xgarrido/dotfiles]
+checkout = git clone 'git@github.com:xgarrido/dotfiles' 'dotfiles'
+
+[Development/github.com/xgarrido/org-website]
+checkout = git clone 'git@github.com:xgarrido/org-website.git' 'org-website'
+publish = make publish
+
+[Development/github.com/xgarrido/d3-change.org]
+checkout = git clone 'git@github.com:xgarrido/d3-change-org.git' 'd3-change.org'
+
+[Development/github.com/xgarrido/org-notes]
+checkout = git clone 'git@github.com:xgarrido/org-notes.git' 'org-notes'
+publish = make publish
+
+[Development/github.com/xgarrido/latex-templates]
+checkout = git clone 'git@github.com:xgarrido/latex-templates.git' 'latex-templates'
+
+[Development/github.com/xgarrido/org-resume]
+checkout = git clone 'git@github.com:xgarrido/org-resume.git' 'org-resume'
+publish = make publish
+
+[Development/github.com/xgarrido/pygments-styles]
+checkout = git clone 'git@github.com:xgarrido/pygments-styles.git' 'pygments-styles'
+
+[Development/orgmode.org/org-mode]
+checkout = git clone 'git://orgmode.org/org-mode.git' 'org-mode'
+
+[Development/github.com/xgarrido/tikz-figures]
 checkout = git clone 'git@github.com:xgarrido/tikz-figures.git' 'tikz-figures'
 generate = zsh -i -c "org-pages generate --html --generate-github-link --debug --do-not-replace-pdf-ext"
 publish = zsh -i -c "org-pages publish --html --generate-github-link --debug --do-not-replace-pdf-ext"
 
-[Development/github/ninja]
+[Development/github.com/martine/ninja]
 checkout = git clone 'git@github.com:martine/ninja.git' 'ninja'
+
+[Development/svn.lal.in2p3.fr/org-caldav]
+checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-caldav' 'org-caldav'
+
+[Development/svn.lal.in2p3.fr/org-lal-website]
+checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-lal-website' 'org-lal-website'
+publish = make publish
