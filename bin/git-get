@@ -65,12 +65,10 @@ fi
 
 # Clone git repository
 dir=$gitdirectory/$dir
-(
-    mkdir -p $dir
-    cd $dir
-    if [[ -d $dir/.git && $gitupdate ]]; then
-        git pull
-    else
-        git clone $gitaddress .
-    fi
-)
+mkdir -p $dir
+cd $dir
+if [[ -d $dir/.git && $gitupdate ]]; then
+    git pull
+else
+    git clone $gitaddress .
+fi
