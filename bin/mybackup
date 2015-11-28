@@ -4,7 +4,7 @@
 # Copyright (C) 2015 Xavier Garrido
 #
 # Author: garrido@lal.in2p3.fr
-# Keywords: backup
+# Keywords: backup, rsync
 # Requirements: pkgtools
 # Status: not intended to be distributed yet
 
@@ -43,7 +43,7 @@ if [ ! -z $profile ]; then
     source="/home/garrido/"
     if [[ $profile == "usb" ]]; then
         pkgtools__msg_notice "Running backup into USB device"
-        notice "Running backup into USB device"
+        notify "Running backup into USB device"
         if [ ! -d /media/backup ]; then
             pkgtools__msg_error "USB device not connected !"
             return 1
@@ -51,7 +51,7 @@ if [ ! -z $profile ]; then
         [ -z $destination ] && destination="/media/backup"
     elif [[ $profile == "lal" ]]; then
         pkgtools__msg_notice "Running backup into LAL disk"
-        notice "Running backup into LAL disk"
+        notify "Running backup into LAL disk"
         pkgtools__quietly_run "ping -q -c 1 nemo4"
         if $(pkgtools__last_command_fails); then
             pkgtools__msg_error "Computer not locally connected to LAL !"
