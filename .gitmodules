@@ -4,3 +4,6 @@
 [submodule "fonts/Font-Awesome"]
 	path = fonts/Font-Awesome
 	url = git://github.com/FortAwesome/Font-Awesome
+[submodule "fonts/ubuntu-mono-powerline-ttf"]
+	path = fonts/ubuntu-mono-powerline-ttf
+	url = https://github.com/pdf/ubuntu-mono-powerline-ttf.git

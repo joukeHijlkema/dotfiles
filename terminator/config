@@ -10,7 +10,7 @@
   title_transmit_bg_color = "#fdf6e3"
   title_transmit_fg_color = "#c0bebf"
 [keybindings]
-  close_term = <Ctrl>w
+  close_term = <Super>q
   go_left = <Super>Left
   go_right = <Super>Right
   move_tab_left = <Shift><Control>Page_Down
