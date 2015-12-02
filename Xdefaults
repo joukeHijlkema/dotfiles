@@ -6,5 +6,5 @@ Xft.hintstyle   : hintslight
 Xft.rgba        : rgb
 Xft.lcdfilter   : lcddefault
 Emacs.font      : Ubuntu Mono 9
-! Emacs.geometry  : 90x40
-Emacs.fullscreen  : maximized
+Emacs.geometry  : 90x40
+! Emacs.fullscreen  : maximized
