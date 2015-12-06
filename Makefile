@@ -9,8 +9,8 @@ help:
 	@echo "make list           #=> Show dot files in this repo"
 	@echo "make deploy         #=> Create symlink to home directory"
 	@echo "make update         #=> Fetch changes for this repo"
-	@echo "make install        #=> Run make update, deploy, init"
-	@echo "make clean          #=> Remove the dot files and this repo"
+	@echo "make install        #=> Run make update, deploy"
+	@echo "make clean          #=> Remove the dot files"
 
 list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
