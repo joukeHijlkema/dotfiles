@@ -1,0 +1,47 @@
+#+TITLE: dotfiles - README
+#+AUTHOR: Xavier Garrido
+#+EMAIL: xavier.garrido@gmail.com
+
+* Description
+These are my personal dotfiles, which I manage with the help of git and a simple
+=Makefile=. This is the base dotfiles repository which contains what I want to
+have available in a basic shell environment.
+
+* What is included
+** Shell environment
+ - [[file:zshrc][zshrc]] :: zsh use =antigen= zsh bundle which is reponsible for downloading and
+   loading different zsh plugins
+ - [[file:bashrc][bashrc]] :: bash (not used anymore)
+ - =[[file:toprc][toprc]] :: fancy colors for =top= command
+
+** X11 settings
+ - [[file:Xdefaults][Xdefaults]] :: it mainly contains some Xft antialias stuff and
+ define =emacs= default font
+ - [[file:Xmodmap][Xmodmap]] :: switch Caps_Lock with ESCAPE key
+
+** Individual tool configurations
+ - [[file:gitconfig][gitconfig]] :: =git= mail and name configuration
+
+** Application configuration
+- [[file:config/openbox/][openbox]] :: =openbox= configuration files
+- [[file:config/terminator][terminator]] :: =terminator= terminal
+- [[file:config/dunst][dunst]] :: =dunst= notification system (much better than =libnotify=)
+
+* Installation
+Create some directory where to store multiple dotfiles repositories.
+#+BEGIN_SRC shell
+  mkdir -p ~/repos/dotfiles
+#+END_SRC
+
+Clone this repository into that directory.
+#+BEGIN_SRC shell
+  git clone https://github.com/xgarrido/dotfiles ~/repos/dotfiles
+#+END_SRC
+
+And symlink it's contents into your home directory.
+#+BEGIN_SRC shell
+  make install
+#+END_SRC
+
+Also check out =make help= for more information on the hows and whats of that
+tool.
