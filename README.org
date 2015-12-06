@@ -9,23 +9,29 @@ have available in a basic shell environment.
 
 * What is included
 ** Shell environment
- - [[file:zshrc][zshrc]] :: zsh use =antigen= zsh bundle which is reponsible for downloading and
-   loading different zsh plugins
- - [[file:bashrc][bashrc]] :: bash (not used anymore)
- - =[[file:toprc][toprc]] :: fancy colors for =top= command
+- [[file:zshrc][zshrc]] :: zsh use =antigen= zsh bundle which is reponsible for downloading and
+     loading different zsh plugins
+- [[file:bashrc][bashrc]] :: bash (not used anymore)
+- [[file:toprc][toprc]] :: fancy colors for =top= command
 
 ** X11 settings
- - [[file:Xdefaults][Xdefaults]] :: it mainly contains some Xft antialias stuff and
- define =emacs= default font
- - [[file:Xmodmap][Xmodmap]] :: switch Caps_Lock with ESCAPE key
+- [[file:xinitrc][xinitrc]] :: execute =openbox= at start time
+- [[file:Xdefaults][Xdefaults]] :: it mainly contains some Xft antialias stuff and define =emacs=
+     default font
+- [[file:Xmodmap][Xmodmap]] :: switch Caps_Lock with ESCAPE key
 
 ** Individual tool configurations
- - [[file:gitconfig][gitconfig]] :: =git= mail and name configuration
+- [[file:gitconfig][gitconfig]] :: =git= mail and name configuration
+- [[file:latexmkrc][latexmkrc]] :: setup for =latexmk=
 
 ** Application configuration
 - [[file:config/openbox/][openbox]] :: =openbox= configuration files
 - [[file:config/terminator][terminator]] :: =terminator= terminal
 - [[file:config/dunst][dunst]] :: =dunst= notification system (much better than =libnotify=)
+
+** Misc.
+- [[file:fonts][fonts]] :: directory that holds additionnal fonts
+- [[file:bin][bin]] :: binaries directory
 
 * Installation
 Create some directory where to store multiple dotfiles repositories.
