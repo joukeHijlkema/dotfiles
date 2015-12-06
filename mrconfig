@@ -89,3 +89,9 @@ checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org
 [Development/svn.lal.in2p3.fr/org-lal-website]
 checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-lal-website' 'org-lal-website'
 publish = make publish
+
+[Development/github.com/xgarrido/org-web-links]
+checkout = git clone 'git@github.com:xgarrido/org-web-links.git' 'org-web-links'
+
+[Development/github.com/xgarrido/org-book]
+checkout = git clone 'git@github.com:xgarrido/org-book.git' 'org-book'
