@@ -1,6 +1,6 @@
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard *) $(wildcard config/*)
-EXCLUSIONS := .git .gitmodules .gitignore README.md Makefile config
+EXCLUSIONS := .git .gitmodules .gitignore README.md Makefile config autofs
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 all: install
@@ -30,4 +30,4 @@ install: update deploy
 
 clean:
 	@echo 'Remove dot files in your home directory...'
-	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/.$(val);)
+	@$(foreach val, $(DOTFILES), rm -vrf $(HOME)/.$(val);)
