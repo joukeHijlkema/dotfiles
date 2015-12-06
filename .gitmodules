@@ -4,9 +4,9 @@
 [submodule "fonts/ubuntu-mono-powerline-ttf"]
 	path = fonts/ubuntu-mono-powerline-ttf
 	url = https://github.com/pdf/ubuntu-mono-powerline-ttf.git
-[submodule "bin/spark.git"]
-	path = bin/spark.git
+[submodule "lib/spark"]
+	path = lib/spark
 	url = https://github.com/holman/spark.git
-[submodule "bin/fasd.git"]
-	path = bin/fasd.git
+[submodule "lib/fasd"]
+	path = lib/fasd
 	url = https://github.com/clvv/fasd.git
