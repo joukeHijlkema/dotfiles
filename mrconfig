@@ -80,9 +80,6 @@ checkout = git clone 'git@github.com:xgarrido/tikz-figures.git' 'tikz-figures'
 generate = zsh -i -c "org-pages generate --html --generate-github-link --debug --do-not-replace-pdf-ext"
 publish = zsh -i -c "org-pages publish --html --generate-github-link --debug --do-not-replace-pdf-ext"
 
-[Development/github.com/martine/ninja]
-checkout = git clone 'git@github.com:martine/ninja.git' 'ninja'
-
 [Development/svn.lal.in2p3.fr/org-caldav]
 checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Development/org-caldav' 'org-caldav'
 
