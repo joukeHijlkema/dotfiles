@@ -10,3 +10,6 @@
 [submodule "lib/fasd"]
 	path = lib/fasd
 	url = https://github.com/clvv/fasd.git
+[submodule "lib/ninja"]
+	path = lib/ninja
+	url = git@github.com:martine/ninja.git
