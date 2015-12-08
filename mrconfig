@@ -10,11 +10,11 @@ publish = zsh -i -c "org-pages publish --html --generate-github-link --debug"
 
 [Teachdir/EM/td]
 checkout = git clone 'git@github.com:xgarrido/licence_em_teaching.git' 'td'
-publish = make publish
+publish = zsh -i -c "org-pages publish --html --color=blue --debug"
 
 [Teachdir/NP/td]
 checkout = git clone 'git@github.com:xgarrido/master_npp_teaching.git' 'td'
-publish = make publish
+publish = zsh -i -c "org-pages publish --html --color=blue --debug"
 
 [Teachdir/D2PFO]
 checkout = git svn clone 'https://svn.lal.in2p3.fr/users/garrido/Teachdir/D2PFO' 'D2PFO'
