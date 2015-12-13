@@ -10,7 +10,7 @@ setxkbmap -layout fr &
 # Disable beep
 xset -b &
 # Set wallpaper
-hsetroot -fill /home/garrido/Images/Wallpapers/default &
+/home/garrido/.config/openbox/scripts/change-wallpaper &
 # Launch tint
 #tint2 &
 # Swap Caps_Lock and Escape keys
