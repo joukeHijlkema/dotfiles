@@ -1,15 +1,26 @@
 #!/bin/bash
 
-/usr/bin/offlineimap
+/usr/bin/offlineimap $@
 if [ $? -ne 0 ]; then
     notify-send -h "string:bgcolor:#DC322F" "error" "offlineimap check fails!"
 fi
 
-checkdir="/home/garrido/.Maildir/LAL/inbox/cur"
-for f in $(find $checkdir -type f)
+account=LAL
+while [ -n "$1" ]; do
+    token="$1"
+    if [[ ${token} == "-a" ]]; then
+        shift 1
+        account=$1
+    fi
+    shift 1
+done
+
+checkdir="/home/garrido/.Maildir/$account/inbox/new"
+for f in $(find $checkdir -mmin -5 -a -type f)
 do
     #mu view $f
-    from=$(mu view $f | grep '^From:' | sed -n '/^From:/,/\</p')
+    from=$(mu view $f | grep '^From:' | sed 's/^From: \(.*\)<.*/\1/')
     subject=$(mu view $f | grep '^Subject:' | sed 's/Subject://')
+    notify-send -h "string:bgcolor:#3F4D91" "$subject" "from $from"
     echo $from $subject
 done
