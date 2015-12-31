@@ -57,7 +57,7 @@
     background_image = None
     font = Ubuntu Mono 9
     foreground_color = "#708183"
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#708183:#002b36:#cb4b16:#859900:#b58900:#268bd2:#6c71c4:#2aa198:#fdf6e3"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#708183:#002b36:#990a1b:#546e00:#7b6000:#00629d:#93115c:#00736f:#fdf6e3"
     scroll_on_output = False
     scrollback_infinite = True
     scrollbar_position = hidden
