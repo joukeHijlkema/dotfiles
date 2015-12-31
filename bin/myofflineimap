@@ -1,0 +1,15 @@
+#!/bin/bash
+
+/usr/bin/offlineimap
+if [ $? -ne 0 ]; then
+    notify-send -h "string:bgcolor:#DC322F" "error" "offlineimap check fails!"
+fi
+
+checkdir="/home/garrido/.Maildir/LAL/inbox/cur"
+for f in $(find $checkdir -type f)
+do
+    #mu view $f
+    from=$(mu view $f | grep '^From:' | sed -n '/^From:/,/\</p')
+    subject=$(mu view $f | grep '^Subject:' | sed 's/Subject://')
+    echo $from $subject
+done
