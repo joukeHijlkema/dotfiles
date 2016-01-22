@@ -13,6 +13,3 @@
 [submodule "lib/ninja"]
 	path = lib/ninja
 	url = git@github.com:martine/ninja.git
-[submodule "fonts/monospacifier"]
-	path = fonts/monospacifier
-	url = https://github.com/cpitclaudel/monospacifier.git
