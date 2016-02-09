@@ -13,3 +13,6 @@
 [submodule "lib/ninja"]
 	path = lib/ninja
 	url = git@github.com:martine/ninja.git
+[submodule "lib/diff-so-fancy"]
+	path = lib/diff-so-fancy
+	url = https://github.com/stevemao/diff-so-fancy.git
