@@ -18,3 +18,5 @@
 [github]
 	oauth-token = 20d3e921112e64dc1432a1f73b49154919d1cf69
 	user = xgarrido
+[core]
+	pager = diff-highlight | diff-so-fancy | less --tabs=1,5 -R
