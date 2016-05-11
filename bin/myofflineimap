@@ -1,26 +1,44 @@
 #!/bin/bash
 
-/usr/bin/offlineimap $@
-if [ $? -ne 0 ]; then
-    notify-send -h "string:bgcolor:#DC322F" "error" "offlineimap check fails!"
-fi
-
-account=LAL
+account=
+kill=false
 while [ -n "$1" ]; do
     token="$1"
     if [[ ${token} == "-a" ]]; then
         shift 1
         account=$1
+    elif [[ ${token} == "-k" ]]; then
+        kill=true
     fi
     shift 1
 done
 
-checkdir="/home/garrido/.Maildir/$account/inbox/new"
-for f in $(find $checkdir -mmin -5 -a -type f)
+# pid_store=/tmp/myofflineimap.pid
+# if ${kill}; then
+# fi
+
+/usr/bin/offlineimap $@
+if [ $? -ne 0 ]; then
+    notify-send -h "string:bgcolor:#DC322F" "error" "offlineimap check fails!"
+else
+    notify-send -h "string:bgcolor:#268BD2" "notice" "offlineimap check done!"
+fi
+
+accounts=( LAL Gmail )
+if [ ! -z ${account} ]; then
+    accounts=( ${account} )
+fi
+
+for acc in ${accounts[@]}
 do
-    #mu view $f
-    from=$(mu view $f | grep '^From:' | sed 's/^From: \(.*\)<.*/\1/')
-    subject=$(mu view $f | grep '^Subject:' | sed 's/Subject://')
-    notify-send -h "string:bgcolor:#3F4D91" "$subject" "from $from"
-    echo $from $subject
+    checkdir="/home/garrido/.Maildir/$acc/inbox/new"
+    for f in $(find $checkdir -mmin -1 -a -type f)
+    do
+        #mu view $f
+        from=$(mu view $f | grep '^From:' | sed 's/^From: \(.*\)<.*/\1/')
+        subject=$(mu view $f | grep '^Subject:' | sed 's/Subject://')
+        notify-send -h "string:bgcolor:#2D2D2D" "$subject" "from ${from}in <b>${acc,,}</b> box"
+        # notify-send -h "string:bgcolor:#3F4D91" "$subject" "from ${from}in <b>${acc,,}</b> box"
+        echo $from $subject
+    done
 done
